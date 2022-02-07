@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace AtlasAddressBook.data.Migrations
+namespace AtlasAddressBook.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -118,11 +118,11 @@ namespace AtlasAddressBook.data.Migrations
 
             modelBuilder.Entity("AtlasAddressBook.Models.Contact", b =>
                 {
-                    b.Property<int>("ContactId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ContactId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address1")
                         .IsRequired()
@@ -137,6 +137,9 @@ namespace AtlasAddressBook.data.Migrations
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("EmailAddress")
                         .HasColumnType("text");
@@ -169,10 +172,7 @@ namespace AtlasAddressBook.data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("created")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("ContactId");
+                    b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
@@ -184,12 +184,12 @@ namespace AtlasAddressBook.data.Migrations
                     b.Property<int>("CategoriesId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ContactsContactId")
+                    b.Property<int>("ContactsId")
                         .HasColumnType("integer");
 
-                    b.HasKey("CategoriesId", "ContactsContactId");
+                    b.HasKey("CategoriesId", "ContactsId");
 
-                    b.HasIndex("ContactsContactId");
+                    b.HasIndex("ContactsId");
 
                     b.ToTable("CategoryContact");
                 });
@@ -358,7 +358,7 @@ namespace AtlasAddressBook.data.Migrations
 
                     b.HasOne("AtlasAddressBook.Models.Contact", null)
                         .WithMany()
-                        .HasForeignKey("ContactsContactId")
+                        .HasForeignKey("ContactsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

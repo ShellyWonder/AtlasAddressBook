@@ -15,4 +15,19 @@ html {
 
 body {
   margin-bottom: 60px;
+    background-color:rgb(1, 9, 43);
+}
+.btn-primary {
+    background-color: #f18043; 
+}
+/*contact list style */
+.contactList-image{
+    max-width: 100%;
+    height: auto;
+}
+@media(min-width: 992 px){
+    contactList-image {
+        max-width: 200px;
+        height: auto;
+    }
 }

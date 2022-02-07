@@ -1,0 +1,41 @@
+﻿@model IEnumerable<AtlasAddressBook.Models.Contact>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+ @foreach(var category in item!.Categories)
+  {
+                <div class="mb-3 glass-cf-style.darkGlass">
+  <div class="row g-0">
+    <div class="col-md-4 ">
+      <img src=@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageType)" class="contactList-image rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">@Html.DisplayFor(modelItem =>item.FirstName) (modelItem =>item.LastName)</h5>
+        <p class="card-text">Email:@Html.DisplayFor(modelItem =>item.Email)</p>
+        <p class="card-text">Phone:@Html.DisplayFor(modelItem =>item.Phone)</p>
+        
+      </div>
+  </div>
+</div>
+ }
+           
+            <div>
+                <a asp-action="Edit" asp-route-id="@item.Id"><i class="bi-pencil-fill" style="font-size: 1.5 rem; color: white"</i>></a> |
+                <a asp-action="Details" asp-route-id="@item.Id"><i class="bi-person-fill" style="font-size: 1.5 rem; color: white"></i></a> |
+                <a asp-action="Delete" asp-route-id="@item.Id"<i class="bi-trash-fill" style="font-size: 1.5 rem; color: red"></i></a> 
+            </div>
+        </tr>
+}
+            
+    </tbody>
+</table>
