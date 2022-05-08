@@ -1,6 +1,5 @@
-﻿@using AtlasAddressBook.Models
+﻿@using AtlasAddressBook.Models.Contact
 @using AtlasAddressBook.Services.Interfaces
-@model Contact
 
 @inject IImageService _imageService
 @{
@@ -17,7 +16,7 @@
         <div class="row">
 
             <div class="col-12 col-md-4">
-                <img src="@_imageService.ConvertByteArrayToFile(Model.ImageData, Model.ImageType)" class="img-fluid"/>
+                <img src="@_imageService.ConvertByteArrayToFile(Model.ImageData!, Model.ImageType!)" class="img-fluid"/>
             </div>
 
             <div class="col-12 col-md-8">
