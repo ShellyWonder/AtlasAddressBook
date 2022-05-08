@@ -13,15 +13,12 @@ namespace AtlasAddressBook.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Landing()
         {
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
