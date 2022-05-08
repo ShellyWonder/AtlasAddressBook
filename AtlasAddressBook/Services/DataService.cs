@@ -13,7 +13,9 @@ namespace AtlasAddressBook.Services
         private readonly UserManager<AppUser> _userManager;
         private readonly ICategoryService _categoryService;
 
-        public DataService(ApplicationDbContext context, UserManager<AppUser> userManager, ICategoryService categoryService)
+        public DataService(ApplicationDbContext context, 
+                           UserManager<AppUser> userManager, 
+                           ICategoryService categoryService)
         {
             _context = context;
             _userManager = userManager;
@@ -29,6 +31,11 @@ namespace AtlasAddressBook.Services
             await SeedDefaultContacts(_context);
             await SeedDefaultCategoriesAsync(_context);
             await DefaultCategoryAssign(_categoryService, _context);
+        }
+
+        public DateTime GetPostGresDate(DateTime datetime)
+        {
+            return DateTime.SpecifyKind(datetime, DateTimeKind.Utc);
         }
 
         private async Task SeedDefaultUserAsync(UserManager<AppUser> userManagerSvc)

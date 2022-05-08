@@ -20,7 +20,7 @@ namespace AtlasAddressBook.Services
             contact = await _context.Contacts.Include(c => c.User)
                                                 .Include(c => c.Categories)
                                                 .FirstOrDefaultAsync(c => c.Id == contactId);
-            return contact;
+            return contact!;
 
         }
     }

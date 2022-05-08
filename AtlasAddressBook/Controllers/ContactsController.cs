@@ -25,6 +25,7 @@ namespace AtlasAddressBook.Controllers
         private readonly ICategoryService _categoryService;
         private readonly IContactService _contactService;
         private readonly SearchService _searchService;
+        private readonly DataService _dataService;
 
 
         public ContactsController(
@@ -32,8 +33,9 @@ namespace AtlasAddressBook.Controllers
             UserManager<AppUser> userManager,
             ICategoryService categoryService,
             IImageService imageServices,
-            IContactService contactService, 
-            SearchService searchService)
+            IContactService contactService,
+            SearchService searchService, 
+            DataService dataService)
         {
             _context = context;
             _userManager = userManager;
@@ -41,6 +43,7 @@ namespace AtlasAddressBook.Controllers
             _imageServices = imageServices;
             _contactService = contactService;
             _searchService = searchService;
+            _dataService = dataService;
         }
 
         // GET: Contacts
@@ -91,8 +94,6 @@ namespace AtlasAddressBook.Controllers
             return View();
         }
         // POST: Contacts/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Birthday,Address1,Address2,City,State,ZipCode,EmailAddress,PhoneNumber,ImageFile")] Contact contact, List<int> contactList)
@@ -100,10 +101,10 @@ namespace AtlasAddressBook.Controllers
             if (ModelState.IsValid)
             {
                 contact.UserId = _userManager.GetUserId(User);
-                contact.Created = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
+                contact.Created = _dataService.GetPostGresDate(DateTime.Now);
                 if (contact.Birthday != null)
                 {
-                    contact.Birthday = DateTime.SpecifyKind((DateTime)contact.Birthday, DateTimeKind.Utc);
+                    contact.Birthday = _dataService.GetPostGresDate(DateTime.Now);
                 }
                 if (contact.ImageFile != null)
                 {
