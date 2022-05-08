@@ -104,7 +104,8 @@ namespace AtlasAddressBook.Controllers
                 contact.Created = _dataService.GetPostGresDate(DateTime.Now);
                 if (contact.Birthday != null)
                 {
-                    contact.Birthday = _dataService.GetPostGresDate(DateTime.Now);
+                    contact.Birthday = _dataService.GetPostGresDate(contact.Birthday.Value);
+                  
                 }
                 if (contact.ImageFile != null)
                 {
