@@ -28,6 +28,11 @@
                             <a class="nav-link text-light" asp-controller="Home" asp-action="Landing">Home</a>
                         </li>
                         
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Contacts" asp-action="Index">Contacts</a>
+                        </li><li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
+                        </li>
                             @if (SignInManager.IsSignedIn(User))
                         {
 
@@ -35,17 +40,12 @@
                                 <form class="form-inline d-inline" asp-controller="Contacts" asp-action="SearchContacts" method="post" >
                                     <div class="input-group">
                                         <input class="form-control mr-sm-2" type="search" name="searchString" placeholder="Search"  />
-                                        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" name="button" value="Search"  />
+                                        <input class="btn btn-outline-warning my-2 my-sm-0" type="submit" name="button" value="Search"  />
 
                                     </div>
                                 </form>
                             </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Contacts" asp-action="Index">Contacts</a>
-                        </li><li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
-                        </li>
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
