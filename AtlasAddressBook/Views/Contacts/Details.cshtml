@@ -12,14 +12,14 @@
     <div class="glass-cf-style darkGlass p-2">
         <div class="row">
             <div class="col-12 col-md-4">
-                 @if(! string.IsNullOrEmpty(Model.ImageType))
+                @if (!string.IsNullOrEmpty(Model.ImageType))
                 {
-                <img src="@_imageService.ConvertByteArrayToFile(Model.ImageData!, Model.ImageType!)" class=" img-fluid" alt="contact image">
-                 }
-                  else
-                        {
-                            <img class="rounded-circle" style="width:60px;height:60px;" src="/img/avatar_icon.png" alt="User Avatar Default Image">
-                        }
+                    <img src="@_imageService.ConvertByteArrayToFile(Model.ImageData!, Model.ImageType!)" class=" img-fluid" alt="contact image">
+                }
+                else
+                {
+                    <img class="rounded-circle" style="width:60px;height:60px;" src="/img/avatar_icon.png" alt="User Avatar Default Image">
+                }
                 <div class="col-12 col-md-8">
                     <div class="row gy-2">
                         <div class="col-12 col-md-6">
