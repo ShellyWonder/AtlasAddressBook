@@ -34,10 +34,10 @@ body{
     border-right: 2px rgba(40, 40, 40, 0.35) solid;
 }
 .glass-cf-style.darkGlass{
-    color: var(--light-gs-color);
+    color: var(--light-gs-color) !important;
 }
     .glass-cf-style.lightGlass {
-        color: var(--dark-gs-color); 
+        color: var(--dark-gs-color) !important;
     }
 .glass-button {
     color: var(--light-gs-color);
