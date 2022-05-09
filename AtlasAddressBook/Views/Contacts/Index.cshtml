@@ -11,7 +11,7 @@
 
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <button class="glass-button" asp-action="Create">Create New</button>
 </p>
 
  @foreach(var item in Model)
@@ -19,7 +19,14 @@
     <div class="mb-3 glass-cf-style.darkGlass">
         <div class="row g-0">
             <div class="col-md-4">
+                @if(! string.IsNullOrEmpty(item.ImageType))
+                {
                 <img src="@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageType)" class="contactList-image rounded-start" alt="contact image">
+                 }
+                  else
+                        {
+                            <img class="rounded-circle" style="width:60px;height:60px;" src="/img/avatar_icon.png" alt="User Avatar Default Image">
+                        }
             </div>
 
             <div class="col-md-8">
