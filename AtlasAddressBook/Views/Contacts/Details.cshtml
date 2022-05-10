@@ -7,7 +7,8 @@
 }
 
 <div>
-    <h1>Contact</h1>
+    <h1>Contact Details</h1>
+    <h4>@Model.FullName</h4>
     <!--address card-->
     <div class="glass-cf-style darkGlass p-2">
         <div class="row">
@@ -18,49 +19,49 @@
                 }
                 else
                 {
-                    <img class="rounded-circle" style="width:60px;height:60px;" src="/img/avatar_icon.png" alt="User Avatar Default Image">
+                    <img class="rounded-circle" style="width:60px;height:60px;" src="/img/GirlOne_4x.png" alt="User Avatar Default Image">
                 }
                 <div class="col-12 col-md-8">
                     <div class="row gy-2">
                         <div class="col-12 col-md-6">
-                            <label for="FirstName" class="form-lablel"> First Name</label>
+                            <label for="FirstName" class="form-label"> First Name</label>
                             <input type="text" readonly class="form-control" id="FirstName" value="@Model.FirstName" />
                         </div>
 
                         <div class="col-12 col-md-6">
-                            <label for="FirstName" class="form-lablel"> Last Name</label>
+                            <label for="FirstName" class="form-label"> Last Name</label>
                             <input type="text" readonly class="form-control" id="LastName" value="@Model.LastName." />
                         </div>
                         <div class="col-12 col-md-6">
-                            <label for="Email" class="form-lablel"> Email</label>
+                            <label for="Email" class="form-label"> Email</label>
                             <input type="text" readonly class="form-control" id="Email" value="@Model.EmailAddress" />
                         </div>
                         <div class="col-12 col-md-6">
-                            <label for="FirstName" class="form-lablel"> Phone Number</label>
+                            <label for="FirstName" class="form-label"> Phone Number</label>
                             <input type="tel" readonly class="form-control" id="Phone" value="@Model.PhoneNumber" />
                         </div>
                         <div class="col-12">
-                            <label for="Address1" class="form-lablel"> Address 1</label>
+                            <label for="Address1" class="form-label"> Address 1</label>
                             <input type="text" readonly class="form-control" id="Address1" value="@Model.Address1" />
                         </div>
                         <div class="col-12">
-                            <label for="Address2" class="form-lablel"> Address 2 </label>
+                            <label for="Address2" class="form-label"> Address 2 </label>
                             <input type="text" readonly class="form-control" id="Address2" value="@Model.Address2" />
                         </div>
                         <div class="col-12 col-md-6">
-                            <label for="City" class="form-lablel"> City</label>
+                            <label for="City" class="form-label"> City</label>
                             <input type="text" readonly class="form-control" id="City" value="@Model.City" />
                         </div>
                         <div class="col-12 col-md-4">
-                            <label for="State" class="form-lablel"> State</label>
+                            <label for="State" class="form-label"> State</label>
                             <input type="text" readonly class="form-control" id="State" value="@Model.State" />
                         </div>
                         <div class="col-12 col-md-2">
-                            <label for="Zip" class="form-lablel"> Zip</label>
+                            <label for="Zip" class="form-label"> Zip</label>
                             <input type="text" readonly class="form-control" id="ZipCode" value="@Model.ZipCode" />
                         </div>
                         <div class="col-6">
-                            <label for=" Birthday" class="form-lablel"> Birthday</label>
+                            <label for=" Birthday" class="form-label"> Birthday</label>
                             <input type="text" readonly class="form-control" id="Birthday" value="@Model.Birthday" />
                         </div>
                         @foreach (var category in Model.Categories)
