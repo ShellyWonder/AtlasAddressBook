@@ -8,14 +8,18 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Edit Contact</h1>
 
 <h4>@Model.FullName</h4>
 
 <div class="glass-cf-style d-flex align-items-center  p-2">
-    <form class="row" method="post" asp-controller="Contacts" asp-action="Edit">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="@Model.UserId" />
+    <form class="row"  asp-action="Edit" asp-controller="Contacts" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="UserId" />
+            <input type="hidden" asp-for="Created" />
+            <input type="hidden" asp-for="ImageData" />
+            <input type="hidden" asp-for="ImageFile" />
         <div class="row g-3 mt-1 p-2">
             <!--col one img-->
             <div class="col-12 col-md-4">
@@ -28,9 +32,10 @@
                     <img class="contactList-image rounded-start mt-2 ms-2" style="width:315px;height:315px;" src="/img/GirlOne_4x.png" alt="User Avatar Default Image">
                 }
 
-                <input asp-for="ImageFile" class="form-control mt-2" accept=".png,.jpg,.jpeg,.gif"
+                 <label asp-for="ImageData" class="control-label"></label>
+                <input type="file" asp-for="ImageFile" class="form-control" accept=".png,.jpg,.jpeg,.gif"
                        onchange="document.getElementById('contactImage').src = window.URL.createObjectURL(this.files[0])" />
-                <span asp-validation-for="ImageFile" class="text-danger"></span>
+                <span asp-validation-for="ImageData" class="text-danger"></span>
                 @if (!string.IsNullOrEmpty(Model.ImageType))
                 {
                     <img class="contactList-image rounded-start mt-2 ms-2" src="@_imageService.ConvertByteArrayToFile(Model.ImageData!, Model!.ImageType)" alt="contact image">
