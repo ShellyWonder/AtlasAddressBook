@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,7 +96,7 @@ namespace AtlasAddressBook.Controllers
         // POST: Contacts/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Birthday,Address1,Address2,City,State,ZipCode,EmailAddress,PhoneNumber,ImageFile")] Contact contact, List<int> contactList)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Birthday,Address1,Address2,City,State,ZipCode,EmailAddress,PhoneNumber,ImageFile")] Contact contact, List<int> categoriesList)
         {
             if (ModelState.IsValid)
             {
@@ -116,7 +116,7 @@ namespace AtlasAddressBook.Controllers
                 _context.Add(contact);
                 await _context.SaveChangesAsync();
 
-                await _categoryService.AddContactToCategoriesAsync(contactList, contact.Id);
+                await _categoryService.AddContactToCategoriesAsync(categoriesList, contact.Id);
                 return RedirectToAction(nameof(Index));
             }
             string userId = _userManager.GetUserId(User);

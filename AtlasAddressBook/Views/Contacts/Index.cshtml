@@ -21,7 +21,7 @@
             <div class="col-md-4">
                 @if(! string.IsNullOrEmpty(item.ImageType))
                 {
-                <img src="@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageType)" class="contactList-image rounded-start mt-2 ms-2" alt="contact image">
+                <img src="@_imageService.ConvertByteArrayToFile(item.ImageData!, item.ImageType)" class="contactList-image rounded-start mt-2 ms-2" alt="contact image">
                  }
                   else
                         {
