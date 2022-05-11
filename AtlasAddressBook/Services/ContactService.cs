@@ -15,11 +15,12 @@ namespace AtlasAddressBook.Services
         }
         public async Task<Contact> GetContactByIdAsync(int contactId)
         {
-            Contact contact = new Contact();
-            contact = await GetContactByIdAsync(contactId);
-            contact = await _context.Contacts.Include(c => c.User)
-                                                .Include(c => c.Categories)
-                                                .FirstOrDefaultAsync(c => c.Id == contactId);
+            Contact contact = new();
+
+            contact = await _context.Contacts
+                                    .Include(c => c.User)
+                                    .Include(c => c.Categories)
+                                    .FirstOrDefaultAsync(c => c.Id == contactId);
             return contact!;
 
         }
