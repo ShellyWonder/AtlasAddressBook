@@ -31,11 +31,12 @@
                 {
                     <img class="contactList-image rounded-start mt-2 ms-2" style="width:315px;height:315px;" src="/img/GirlOne_4x.png" alt="User Avatar Default Image">
                 }
-
-                 <label asp-for="ImageData" class="control-label"></label>
+                <div class="col-lg-5 mt-1">
+                 <label asp-for="ImageData" class="control-label visually-hidden"></label>
                 <input type="file" asp-for="ImageFile" class="form-control" accept=".png,.jpg,.jpeg,.gif"
                        onchange="document.getElementById('contactImage').src = window.URL.createObjectURL(this.files[0])" />
-                <span asp-validation-for="ImageData" class="text-danger"></span>
+                <span asp-validation-for="ImageData" class="text-light"></span>
+                </div>
                 @if (!string.IsNullOrEmpty(Model.ImageType))
                 {
                     <img class="contactList-image rounded-start mt-2 ms-2" src="@_imageService.ConvertByteArrayToFile(Model.ImageData!, Model!.ImageType)" alt="contact image">
@@ -63,9 +64,13 @@
                         <label for="Email" class="form-label mt-1">Email</label>
                         <input type="email" class="form-control" id="Email" Value="@Model.EmailAddress" required />
                     </div>
-                    <div class="col-12 col-md-6 form-group">
+                    <div class="col-12 col-md-3 form-group">
                         <label for="Phone" class="form-label mt-1">Phone</label>
                         <input type="tel" class="form-control" id="Phone" Value="@Model.PhoneNumber" />
+                    </div>
+                    <div class="col-12 col-md-3 form-group">
+                        <label for="Birthday" class="form-label mt-1">Birthday</label>
+                        <input type="date" class="form-control" id="Birthday" Value="@Model.Birthday" required />
                     </div>
                     <!--one div spans "row"-->
                     <div class="col-12 form-group">
@@ -81,18 +86,14 @@
                         <input type="text" class="form-control" id="city" Value="@Model.City" required />
                     </div>
                     <!--STATES drop down-->
-                    <div class="col-12 col-md-2 form-group">
-                        <label asp-for="State" class="control-label mt-1">State</label>
-                        <select asp-for="State" asp-items="@ViewBag.StatesList" Value="@Model.State" class="form-control"></select>
-                        <span asp-validation-for="State" class="text-danger"></span>
-                    </div>
-                    <div class="col-12 col-md-2 form-group">
+                    <div class=" form-group">
+                    <label asp-for="State" class="control-label"></label>
+                    <select asp-for="State"   asp-items="ViewBag.StatesList"   class="form-control">States</select>
+                    <span asp-validation-for="State" class="text-light"></span>
+                </div>
+                    <div class="col-12 col-md-3 form-group">
                         <label for="City" class="form-label mt-1">Zip</label>
                         <input type="text" class="form-control" id="zip" Value="@Model.ZipCode" required />
-                    </div>
-                    <div class="col-12 col-md-2 form-group">
-                        <label for="Birthday" class="form-label mt-1">Birthday</label>
-                        <input type="date" class="form-control" id="Birthday" Value="@Model.Birthday" required />
                     </div>
                 </div>
                 <div class="col-12 form-group">
@@ -105,7 +106,7 @@
                     }
                 </div>
                 <div class="col-12 d-flex justify-content-end p-2">
-                    <input type="submit" asp-action="Edit" class="btn btn-primary" />
+                    <input type="submit" asp-action="Edit" class="w-100 btn btn-lg glass-button" />
                 </div>
             </div>
         </div>
