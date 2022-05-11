@@ -27,8 +27,11 @@ namespace AtlasAddressBook.Models
         public DateTime? Birthday { get; set; }
 
         [Required]
+        [StringLength(75, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+        [Display(Name = "Address")]
         public string? Address1 { get; set; }
 
+        [StringLength(75, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 0)]
         public string? Address2 { get; set; }
 
         [Required]
