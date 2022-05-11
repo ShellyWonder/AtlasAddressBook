@@ -16,7 +16,9 @@ body{
     color: var(--light-gs-color);
 }
 
-
+.delete-warning {
+    color: darkred;
+}
 .pageBG{
     background: url("/img/AbstractSpheres.png");
     background-size: cover;
