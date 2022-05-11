@@ -11,12 +11,6 @@
 <h4>@Model.FullName</h4>
 
 <div class="glass-cf-style d-flex align-items-center  p-2">
-    <form class="row" asp-action="Edit" asp-controller="Contacts" method="post" enctype="multipart/form-data">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="Id" />
-        <input type="hidden" asp-for="UserId" />
-        <input type="hidden" asp-for="Created" />
-
         <div class="row g-3 mt-1 p-2">
             <!--col one img-->
             <div class="col-12 col-md-4">
@@ -61,20 +55,16 @@
                         <label for="Email" class="form-label mt-1">Email</label>
                         <input  type="email" readonly class="form-control" id="Email" Value="@Model.EmailAddress" required />
                     </div>
-                    <div class="col-12 col-md-3 form-group">
+                    <div class="col-12 col-md-6 form-group">
                         <label for="Phone" class="form-label mt-1">Phone</label>
                         <input  type="tel" readonly class="form-control" id="Phone" Value="@Model.PhoneNumber" />
                     </div>
-                    <div class="col-12 col-md-3 form-group">
-                        <label for="Birthday" class="form-label mt-1">Birthday</label>
-                        <input type="date" readonly class="form-control" id="Birthday" Value="@Model.Birthday" required />
-                    </div>
-                    <!--one div spans "row"-->
-                    <div class="col-12 form-group">
+                    
+                    <div class="col-12 col-md-6 form-group">
                         <label for="Address1" class="form-label mt-1">Address</label>
                         <input  type="text" readonly class="form-control" id="Address1" Value="@Model.Address1" />
                     </div>
-                    <div class="col-12 form-group">
+                    <div class="col-12 col-md-6 form-group">
                         <label for="inputAddress2" class="form-label  mt-1">Address 2</label>
                         <input  type="text" readonly class="form-control" id="Address 2" value="@Model.Address2" />
                     </div>
@@ -83,15 +73,18 @@
                         <input type="text" readonly class="form-control" id="city" Value="@Model.City" required />
                     </div>
                     <!--STATES drop down-->
-                    <div class="col-12 col-md-3 form-group">
-                        <input readonly />
+                    <div class="col-12  col-md-6 mt-1 form-group">
                         <label asp-for="State" class="control-label"></label>
-                        <select asp-for="State" asp-items="ViewBag.StatesList" Value="@Model.State" class="form-control">States</select>
+                        <select asp-for="State" asp-items="ViewBag.StatesList" class="form-control">States</select>
                         <span asp-validation-for="State" class="text-light"></span>
                     </div>
-                    <div class="col-12 col-md-3 form-group">
+                    <div class="col-12 col-md-6 form-group">
                         <label for="City" class="form-label mt-1">Zip</label>
                         <input  type="text" readonly class="form-control" id="zip" Value="@Model.ZipCode" required />
+                    </div>
+                    <div class="col-12 col-md-6 form-group">
+                        <label for="Birthday" class="form-label mt-1">Birthday</label>
+                        <input type="date" readonly class="form-control" id="Birthday" Value="@Model.Birthday" required />
                     </div>
                 </div>
                 <div class="col-12 form-group">
@@ -103,25 +96,17 @@
                         </div>
                     }
                 </div>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+            <a asp-action="Index">Back to List</a>
+        </div>
 
             </div>
         </div>
 
-    </form>
+   
 </div>
-
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+                  
 
 
 
