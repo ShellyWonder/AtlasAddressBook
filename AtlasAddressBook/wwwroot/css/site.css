@@ -25,6 +25,7 @@ body {
 .contactList-image{
     max-width: 100%;
     height: auto;
+    border-radius:8px;
 }
 @media(min-width: 992 px){
     contactList-image {
