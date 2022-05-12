@@ -140,7 +140,7 @@ namespace AtlasAddressBook.Services
 
             foreach (var category in user?.Categories!)
             {
-                await categorySvc.AddContactToCategoryAsync(category.Id, contact!.Id);
+                await categorySvc.AddContactToCategoriesAsync(category.Id, contact!.Id);
             }
         }
     }
