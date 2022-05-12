@@ -4,7 +4,7 @@ namespace AtlasAddressBook.Services.Interfaces
 {
             public interface ICategoryService
         {
-            Task AddContactToCategoryAsync(int categoryId, int contactId);
+            Task AddContactToCategoriesAsync(int categoryId, int contactId);
 
             Task AddContactToCategoriesAsync(List<int> categoryList, int contactId);
 

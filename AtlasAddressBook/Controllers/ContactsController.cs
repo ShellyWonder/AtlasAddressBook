@@ -97,6 +97,8 @@ namespace AtlasAddressBook.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Birthday,Address1,Address2,City,State,ZipCode,EmailAddress,PhoneNumber,ImageFile")] Contact contact, List<int> categoriesList)
         {
+            string userId = _userManager.GetUserId(User);
+
             if (ModelState.IsValid)
             {
                 contact.UserId = _userManager.GetUserId(User);
@@ -118,7 +120,6 @@ namespace AtlasAddressBook.Controllers
                 await _categoryService.AddContactToCategoriesAsync(categoriesList, contact.Id);
                 return RedirectToAction(nameof(Index));
             }
-            string userId = _userManager.GetUserId(User);
             ViewData["StatesList"] = new SelectList(Enum.GetValues(typeof(States)).Cast<States>().ToList());
             ViewData["CategoryList"] = new MultiSelectList(await _categoryService.GetUserCategoriesAsync(userId), "Id", "Name");
             return View();
