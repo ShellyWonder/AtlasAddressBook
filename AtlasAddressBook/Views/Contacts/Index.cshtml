@@ -2,7 +2,7 @@
 @using AtlasAddressBook.Models
 @using AtlasAddressBook.Services.Interfaces
 @inject IImageService _imageService
-    
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -11,41 +11,41 @@
 
 
 <p>
-    <a class="glass-button" asp-controller="Contacts"  asp-action="Create">Create New</a>
+    <a class="glass-button" asp-controller="Contacts" asp-action="Create">Create New</a>
 </p>
 
- @foreach(var item in Model)
- {
+@foreach (var item in Model)
+{
     <div class="mb-3 glass-cf-style">
         <div class="row g-0">
             <div class="col-md-4">
-                @if(! string.IsNullOrEmpty(item.ImageType))
+                @if (item.ImageData != null)
                 {
-                <img src="@_imageService.ConvertByteArrayToFile(item.ImageData!, item.ImageType)" class="contactList-image rounded-start mt-2 ms-2" alt="contact image">
-                 }
-                  else
-                        {
-                            <img class="contactList-image rounded-start mt-2 ms-2" style="width:200px;height:200px;" src="/img/GirlOne_4x.png" alt="User Avatar Default Image">
-                        }
+                    <img src="@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageType!)" class="contactList-image rounded-start mt-2 ms-2" alt="contact image">
+                }
+                else
+                {
+                    <img class="contactList-image rounded-start mt-2 ms-2" style="width:200px;height:200px;" src="/img/GirlOne_4x.png" alt="User Avatar Default Image">
+                }
+
             </div>
 
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">@Html.DisplayFor(modelItem => @item.FirstName) @Html.DisplayFor(modelItem => @item.LastName) </h5>
                     <div class="card-text">Email: @Html.DisplayFor(modelItem => @item.EmailAddress) </div>
-                    <div class="card-text">Phone: @Html.DisplayFor(modelItem => @item.PhoneNumber) </div>        
+                    <div class="card-text">Phone: @Html.DisplayFor(modelItem => @item.PhoneNumber) </div>
                 </div>
             </div>
-                <div class="m-3">
-                    <a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="bi-pencil-fill" style="font-size: 1.5rem; color: greenyellow "></i></a> |
-                    <a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi-person-fill" style="font-size: 1.5rem; color: white"></i></a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="bi-trash-fill" style="font-size: 1.5rem; color: red"></i></a> 
-                </div>
+            <div class="m-3">
+                <a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="bi-pencil-fill" style="font-size: 1.5rem; color: greenyellow "></i></a> |
+                <a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi-person-fill" style="font-size: 1.5rem; color: white"></i></a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="bi-trash-fill" style="font-size: 1.5rem; color: red"></i></a>
+            </div>
         </div>
     </div>
 
- }
-           
+}
 
-       
-           
+
+
