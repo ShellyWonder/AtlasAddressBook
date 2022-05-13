@@ -6,107 +6,84 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
 
-<h4>@Model.FullName</h4>
+<div class="glass-cf-style m-5 p-3">
 
-<div class="glass-cf-style d-flex align-items-center  p-2">
-        <div class="row g-3 mt-1 p-2">
-            <!--col one img-->
-            <div class="col-12 col-md-4">
-                @if (!string.IsNullOrEmpty(Model.ImageType))
-                {
-                    <img class="contactList-image rounded-start  mt-2 ms-2" src="@_imageService.ConvertByteArrayToFile(Model.ImageData!, Model!.ImageType)" alt="contact image" />
-                }
-                else
-                {
-                    <img class="contactList-image rounded-start mt-2 ms-2" style="width:315px;height:315px;" src="/img/GirlOne_4x.png" alt="User Avatar Default Image">
-                }
-                <div class="col-lg-5 mt-1">
-                    <label asp-for="ImageData" class="control-label visually-hidden"></label>
-                    <input type="file" asp-for="ImageFile" class="form-control" accept=".png,.jpg,.jpeg,.gif"
-                           onchange="document.getElementById('contactImage').src = window.URL.createObjectURL(this.files[0])" />
-                    <span asp-validation-for="ImageData" class="text-light"></span>
-                </div>
-                @if (!string.IsNullOrEmpty(Model.ImageType))
-                {
-                    <img class="contactList-image rounded-start mt-2 ms-2" src="@_imageService.ConvertByteArrayToFile(Model.ImageData!, Model!.ImageType)" alt="contact image">
-                }
-                else
-                {
-                    <img class="contactList-image rounded-start mt-2 ms-2" style="width:60px;height:60px;" src="/img/GirlOne_4x.png" alt="User Avatar Default Image">
-                }
+            <h1 class=" mt-3 d-flex justify-content-sm-start justify-content-md-center">CONTACT DETAILS</h1>
+            <hr />
+            <div class="row mt-1 p-2">
+            <h2 class=" mt-3 d-flex justify-content-sm-start justify-content-md-center">@Model.FullName</h2>
             </div>
-
-            <div class="col-12 col-md-8">
-                <!--creates row inside of the column-->
-                <div class="row mb-1">
-                    <!--Column pairs--name "row"-->
-                    <div class="col-12 col-md-6 form-group">
-                        <label for="FirstName" class="form-label">First Name</label>
-                        <input type="text" readonly class="form-control" id="FirstName" Value="@Model.FirstName" required />
-                    </div>
-                    <div class="col-12 col-md-6 form-group">
-                        <label for="LastName" class="form-label">Last Name</label>
-                        <input type="text" readonly class="form-control" id="LastName" Value="@Model.LastName" required />
-                    </div>
-                    <!--Column pairs (email & phone) creates "row"-->
-                    <div class="col-12 col-md-6 form-group">
-                        <label for="Email" class="form-label mt-1">Email</label>
-                        <input  type="email" readonly class="form-control" id="Email" Value="@Model.EmailAddress" required />
-                    </div>
-                    <div class="col-12 col-md-6 form-group">
-                        <label for="Phone" class="form-label mt-1">Phone</label>
-                        <input  type="tel" readonly class="form-control" id="Phone" Value="@Model.PhoneNumber" />
-                    </div>
-                    
-                    <div class="col-12 col-md-6 form-group">
-                        <label for="Address1" class="form-label mt-1">Address</label>
-                        <input  type="text" readonly class="form-control" id="Address1" Value="@Model.Address1" />
-                    </div>
-                    <div class="col-12 col-md-6 form-group">
-                        <label for="inputAddress2" class="form-label  mt-1">Address 2</label>
-                        <input  type="text" readonly class="form-control" id="Address 2" value="@Model.Address2" />
-                    </div>
-                    <div class="col-12 col-md-6 form-group">
-                        <label for="inputCity" class="form-label mt-1">City</label>
-                        <input type="text" readonly class="form-control" id="city" Value="@Model.City" required />
-                    </div>
-                    <!--STATES drop down-->
-                    <div class="col-12  col-md-6 mt-1 form-group">
-                        <label asp-for="State" class="control-label"></label>
-                        <select asp-for="State" asp-items="ViewBag.StatesList" class="form-control">States</select>
-                        <span asp-validation-for="State" class="text-light"></span>
-                    </div>
-                    <div class="col-12 col-md-6 form-group">
-                        <label for="City" class="form-label mt-1">Zip</label>
-                        <input  type="text" readonly class="form-control" id="zip" Value="@Model.ZipCode" required />
-                    </div>
-                    <div class="col-12 col-md-6 form-group">
-                        <label for="Birthday" class="form-label mt-1">Birthday</label>
-                        <input type="date" readonly class="form-control" id="Birthday" Value="@Model.Birthday" required />
-                    </div>
-                </div>
-                <div class="col-12 form-group">
-                    @foreach (var category in Model.Categories)
+            <div class="row mt-1 p-2">
+                <!--col one img-->
+                <div class="col-12 col-lg-4">
+                    @if (Model.ImageData != null)
                     {
-                        <div class="form-check form-switch form-check-inline">
-                            <input type="checkbox" readonly class="form-check-input" name="CategoryList" value="@category.Id" />
-                            <label class="form-check-label" for="CategoryList">@category.Name</label>
-                        </div>
+                        <img class="contactList-image rounded-start  mt-2 ms-2" src="@_imageService.ConvertByteArrayToFile(Model.ImageData, Model!.ImageType!)" alt="contact image" />
                     }
+                    else
+                    {
+                        <img class="contactList-image rounded-start mt-2 ms-2" style="width:315px;height:315px;" src="/img/GirlOne_4x.png" alt="User Avatar Default Image">
+                    }
+                    
                 </div>
-        <div>
-            <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-            <a asp-action="Index">Back to List</a>
-        </div>
 
+                <div class="col-12 col-lg-8">
+                    <!--creates row inside of the column-->
+                    <div class="row mb-1">
+                        <!--Column pairs--name "row"-->
+                        <div class="col-12 col-lg-6 form-group">
+                            <label for="FirstName" class="form-label">First Name</label>
+                            <input type="text" readonly class="form-control" id="FirstName" Value="@Model.FirstName"  />
+                        </div>
+                        <div class="col-12 col-lg-6 form-group">
+                            <label for="LastName" class="form-label">Last Name</label>
+                            <input type="text" readonly class="form-control" id="LastName" Value="@Model.LastName"  />
+                        </div>
+                        <!--Column pairs (email & phone) creates "row"-->
+                        <div class="col-12 col-lg-6 form-group">
+                            <label for="Email" class="form-label mt-1">Email</label>
+                            <input type="email" readonly class="form-control" id="Email" Value="@Model.EmailAddress"  />
+                        </div>
+                        <div class="col-12 col-lg-6 form-group">
+                            <label for="Phone" class="form-label mt-1">Phone</label>
+                            <input type="tel" readonly class="form-control" id="Phone" Value="@Model.PhoneNumber" />
+                        </div>
+
+                        <div class="col-12 col-lg-6 form-group">
+                            <label for="Address1" class="form-label mt-1">Address</label>
+                            <input type="text" readonly class="form-control" id="Address1" Value="@Model.Address1" />
+                        </div>
+                        <div class="col-12 col-lg-6 form-group">
+                            <label for="inputAddress2" class="form-label  mt-1">Address 2</label>
+                            <input type="text" readonly class="form-control" id="Address 2" value="@Model.Address2" />
+                        </div>
+                        <div class="col-12 col-lg-6 form-group">
+                            <label for="inputCity" class="form-label mt-1">City</label>
+                            <input type="text" readonly class="form-control" id="city" Value="@Model.City"  />
+                        </div>
+                        <!--STATES drop down-->
+                        <div class="col-12  col-lg-6 mt-1 form-group">
+                            <label asp-for="State" class="control-label"></label>
+                            <select asp-for="State" asp-items="ViewBag.StatesList" class="form-control">State</select>
+                            <span asp-validation-for="State" class="text-light"></span>
+                        </div>
+                        <div class="col-12 col-lg-6 form-group">
+                            <label for="City" class="form-label mt-1">Zip</label>
+                            <input type="text" readonly class="form-control" id="zip" Value="@Model.ZipCode" />
+                        </div>
+                        <div class="col-12 col-lg-6 form-group">
+                            <label for="Birthday" class="form-label mt-1">Birthday</label>
+                            <input type="date" readonly class="form-control" id="Birthday" Value="@Model.Birthday" />
+                        </div>
+                        <div class="m-1">
+                        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                        <a asp-action="Index">Back to List</a> 
+                        </div>
+                    </div>
+
+                </div>
             </div>
+
         </div>
-
-   
-</div>
-                  
-
-
 
