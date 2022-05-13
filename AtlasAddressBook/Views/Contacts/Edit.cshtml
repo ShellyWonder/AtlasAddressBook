@@ -8,119 +8,125 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit Contact</h1>
 
-<h4>@Model.FullName</h4>
+<div class="glass-cf-style m-5 p-3">
 
-<div class="glass-cf-style d-flex align-items-center  p-2">
-    <form class="row" asp-action="Edit" asp-controller="Contacts" method="post" enctype="multipart/form-data">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="Id" />
-        <input type="hidden" asp-for="UserId" />
-        <input type="hidden" asp-for="Created" />
-        <input type="hidden" asp-for="ImageData" />
-        <input type="hidden" asp-for="ImageFile" />
-        <div class="row g-3 mt-1 p-2">
-            <!--col one img-->
-            <div class="form-group col-12 col-md-4">
+    <h1 class=" mt-3 d-flex justify-content-sm-start justify-content-md-center">EDIT CONTACT</h1>
+    <hr />
+    
+        <h3 class=" mt-3 d-flex justify-content-sm-start justify-content-md-center">@Model.FullName</h3>
+    
+        <form asp-action="Edit" asp-controller="Contacts" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="UserId" />
+            <input type="hidden" asp-for="Created" />
+            <input type="hidden" asp-for="ImageData" />
+            <input type="hidden" asp-for="ImageFile" />
 
-                <label asp-for="ImageFile" class="control-label"></label>
-                <input asp-for="ImageFile" class="form-control" accept=".png,.jpg,.jpeg,.gif"
-                       onchange="document.getElementById('contactImage').src = window.URL.createObjectURL(this.files[0])" />
-                <span asp-validation-for="ImageFile" class="text-danger"></span>
-                @if (Model?.ImageData != null)
+    <div class="row  row-cols-1 row-cols-lg-2 mt-1 p-2">
+            <div class="col-lg-4">
+
+            
+                @if (Model.ImageData != null)
                 {
-                    <img id="contactImage" class="img-fluid img-thumbnail" style="width:100px;height:80px" src="data:image/*;base64,@(Convert.ToBase64String(Model.ImageData))">
+                    <img class="contactList-image" src="@_imageService.ConvertByteArrayToFile(Model.ImageData, Model!.ImageType!)" alt="contact image" />
                 }
                 else
                 {
-                    <img id="contactImage" class="img-fluid img-thumbnail" style="width:100px;height:100px" src="img/GirlOne_4x.png">
+                    <img class="contactList-image" src="/img/GirlOne_4x.png" alt="User Avatar Default Image">
                 }
-
+                @*<div class=" col form-group">
+                    <label asp-for="ImageFile" class="control-label"></label>
+                    <input asp-for="ImageFile" class="form-control" accept=".png,.jpg,.jpeg,.gif"
+                           onchange="document.getElementById('contactImage').src = window.URL.createObjectURL(this.files[0])" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>*@
             </div>
 
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-lg-8">
                 <!--creates row inside of the column-->
                 <div class="row mb-1">
-                    <!--Column pairs--name "row"-->
+                   
                     <div class="col-12 col-lg-6 form-group">
-                        <label asp-for="FirstName" class="form-label">First Name</label>
+                        <label asp-for="FirstName" class="form-label"></label>
                         <input asp-for="FirstName" class="form-control" />
                         <span asp-validation-for="FirstName" class="text-danger"></span>
                     </div>
                     <div class="col-12 col-lg-6 form-group">
-                        <label asp-for="LastName" class="form-label">Last Name</label>
+                        <label asp-for="LastName" class="form-label"></label>
                         <input asp-for="LastName" class="form-control" />
-                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                        <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
-                    <div class="col-12 col-md-6 form-group">
-                        <label asp-for="EmailAddress" class="form-label"></label>
-                        <input asp-for="EmailAddress" class="form-control" />
+
+                    <div class="col-12 col-lg-6 form-group">
+                        <label asp-for="EmailAddress" class="form-label mt-1"></label>
+                        <input asp-for="EmailAddress" class="form-control " />
                         <span asp-validation-for="EmailAddress" class="text-danger"></span>
                     </div>
                     <div class="col-12 col-md-6 form-group">
-                        <label asp-for="PhoneNumber" class="form-label"></label>
+                        <label asp-for="PhoneNumber" class="form-label mt-1"></label>
                         <input asp-for="PhoneNumber" class="form-control" />
                         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                     </div>
+
                     <div class="col-12 col-lg-6 form-group">
-                        <label asp-for="Address1" class="form-label"></label>
+                        <label asp-for="Address1" class="form-label mt-1"></label>
                         <input asp-for="Address1" class="form-control" />
                         <span asp-validation-for="Address1" class="text-danger"></span>
                     </div>
                     <div class="col-12 col-lg-6 form-group">
-                        <label asp-for="Address2" class="form-label"></label>
+                        <label asp-for="Address2" class="form-label mt-1"></label>
                         <input asp-for="Address2" class="form-control" />
                         <span asp-validation-for="Address2" class="text-danger"></span>
                     </div>
-
                     <div class="col-12 col-lg-6 form-group">
-                        <label asp-for="City" class="form-label"></label>
+                        <label asp-for="City" class="form-label mt-1"></label>
                         <input asp-for="City" class="form-control" />
                         <span asp-validation-for="City" class="text-danger"></span>
                     </div>
-                    <!--STATES drop down-->
                     <div class="col-12 col-lg-6 mt-1 form-group">
-                        <label asp-for="State" class="control-label"></label>
+                        <label asp-for="State" class="control-label mt-1"></label>
                         <select asp-for="State" asp-items="ViewBag.StatesList" class="form-control"></select>
                         <span asp-validation-for="State" class="text-light"></span>
                     </div>
                     <div class="col-12 col-lg-6 form-group">
-                        <label asp-for="ZipCode" class="form-label"></label>
+                        <label asp-for="ZipCode" class="form-label mt-1"></label>
                         <input asp-for="ZipCode" class="form-control" />
                         <span asp-validation-for="ZipCode" class="text-danger"></span>
                     </div>
                     <div class="col-12 col-lg-6 form-group">
-                        <label asp-for="Birthday" class="form-label"></label>
+                        <label asp-for="Birthday" class="form-label mt-1"></label>
                         <input asp-for="Birthday" class="form-control" />
                         <span asp-validation-for="Birthday" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="col-12 form-group">
-                    @foreach (var category in Model!.Categories)
-                    {
-                        <div class="form-check form-switch form-check-inline">
-                            <label asp-for="Categories" class="control-label">Add Contact to Categories</label>
-                            <select name="CategoryList" class="form-select" asp-items="ViewBag.CategoryList" multiple></select>
-                        </div>
 
-                    }
-                </div>
-                <div class="col-12 d-flex justify-content-end p-2">
-                    <input type="submit" asp-action="Edit" asp-controller="Contacts" class="w-100 btn btn-lg glass-button" />
-                </div>
-                <div>
-                    <a asp-action="Index">Back to List</a>
+                    <div class="col-12 form-group">
+                        @foreach (var category in Model!.Categories)
+                        {
+                            <div class="form-check form-switch form-check-inline">
+                                <label asp-for="Categories" class="control-label">Add Contact to Categories</label>
+                                <select name="CategoryList" class="form-select" asp-items="ViewBag.CategoryList" multiple></select>
+                            </div>
+
+                        }
+                    </div>
+                    <div class="col-12 d-flex justify-content-end mt-2 p-2">
+                        <input type="submit" asp-action="Edit" asp-controller="Contacts" class="w-100 btn btn-lg glass-button" />
+                    </div>
+                        <div>
+                            <a asp-action="Index">Back to List</a>
+                        </div>
                 </div>
             </div>
-        </div>
-    </form>
-</div>
+            </div>
+        </form>
 
+    </div>
 
 
 @section Scripts {
     @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
-}
+    }
+    }

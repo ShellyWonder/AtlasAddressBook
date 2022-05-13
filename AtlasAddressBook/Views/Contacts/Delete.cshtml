@@ -19,11 +19,11 @@
                 <div class="col-12 col-lg-4">
                     @if (Model.ImageData != null)
                     {
-                        <img class="contactList-image rounded-start  mt-2 ms-2" src="@_imageService.ConvertByteArrayToFile(Model.ImageData, Model!.ImageType!)" alt="contact image" />
+                        <img class="contactList-image" src="@_imageService.ConvertByteArrayToFile(Model.ImageData, Model!.ImageType!)" alt="contact image" />
                     }
                     else
                     {
-                        <img class="contactList-image rounded-start mt-2 ms-2" style="width:315px;height:315px;" src="/img/GirlOne_4x.png" alt="User Avatar Default Image">
+                        <img class="contactList-image" src="/img/GirlOne_4x.png" alt="User Avatar Default Image">
                     }
                     
                 </div>
@@ -40,10 +40,10 @@
                             <label for="LastName" class="form-label">Last Name</label>
                             <input type="text" readonly class="form-control" id="LastName" Value="@Model.LastName"  />
                         </div>
-                        <!--Column pairs (email & phone) creates "row"-->
+                        
                         <div class="col-12 col-lg-6 form-group">
-                            <label for="Email" class="form-label mt-1">Email</label>
-                            <input type="email" readonly class="form-control" id="Email" Value="@Model.EmailAddress"  />
+                            <label for="EmailAddress" class="form-label mt-1">Email</label>
+                            <input type="email" readonly class="form-control" id="EmailAddress" Value="@Model.EmailAddress"  />
                         </div>
                         <div class="col-12 col-lg-6 form-group">
                             <label for="Phone" class="form-label mt-1">Phone</label>
@@ -64,12 +64,11 @@
                         </div>
                         <!--STATES drop down-->
                         <div class="col-12  col-lg-6 mt-1 form-group">
-                            <label asp-for="State" class="control-label"></label>
-                            <select asp-for="State" asp-items="ViewBag.StatesList" class="form-control">State</select>
-                            <span asp-validation-for="State" class="text-light"></span>
+                            <label for="City" class="form-label">State</label>
+                            <input type="text" readonly class="form-control" id="zip" Value="@Model.State" />
                         </div>
                         <div class="col-12 col-lg-6 form-group">
-                            <label for="City" class="form-label mt-1">Zip</label>
+                            <label for="State" class="form-label mt-1">Zip</label>
                             <input type="text" readonly class="form-control" id="zip" Value="@Model.ZipCode" />
                         </div>
                         <div class="col-12 col-lg-6 form-group">
