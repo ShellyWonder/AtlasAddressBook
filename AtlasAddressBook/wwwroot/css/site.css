@@ -1,35 +1,39 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
-    background-color:rgb(1, 9, 43);
+    margin-bottom: 60px;
+    background-color: rgb(1, 9, 43);
 }
+
 .btn-primary {
-    background-color: #f18043; 
+    background-color: #f18043;
 }
 
 /*contact list style */
-.contactList-image{
+.contactList-image {
     max-width: 100%;
     height: auto;
-    border-radius:8px;
+    border-radius: 8px;
+    padding: 4px;
 }
-@media(min-width: 992 px){
+
+@media(min-width: 992 px) {
     contactList-image {
         max-width: 200px;
         height: auto;
     }
 }
+
