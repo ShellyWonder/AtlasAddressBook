@@ -21,11 +21,11 @@
             <div class="col-md-4">
                 @if (item.ImageData != null)
                 {
-                    <img src="@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageType!)" class="contactList-image rounded-start mt-2 ms-2" alt="contact image">
+                    <img src="@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageType!)" class="contactList-image" alt="contact image">
                 }
                 else
                 {
-                    <img class="contactList-image rounded-start mt-2 ms-2" style="width:200px;height:200px;" src="/img/GirlOne_4x.png" alt="User Avatar Default Image">
+                    <img class="contactList-image rounded-start" src="/img/GirlOne_4x.png" alt="User Avatar Default Image">
                 }
 
             </div>
