@@ -4,16 +4,17 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>All Categories</h1>
-
-    <a class="glass-button mt-1 mb-3" asp-controller="Categories" asp-action="Create">Create New</a>
-
+<div class="mt-2 mb-3 glass-cf-style">
+<h1 class=" mt-3 d-flex justify-content-sm-start justify-content-md-center">ALL CATEGORIES</h1>
+   
+    <a class="glass-button m-3" asp-controller="Categories" asp-action="Create">Create New</a>
+</div>
 
     @foreach (var item in Model)
     {
         <div class="mb-3 glass-cf-style">
-            <div class="row g-0">
-                <div class="col-md-12">
+            <div class="row g-2">
+                <div class="col">
                 <div class="card-body">
                     <h5 class="card-title">@Html.DisplayFor(modelItem => @item.Name) </h5>
                     <div class="card-text">Members: @Html.DisplayFor(modelItem => @item.User) </div>
