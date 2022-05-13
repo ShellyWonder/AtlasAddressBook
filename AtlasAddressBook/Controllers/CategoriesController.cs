@@ -1,4 +1,4 @@
-﻿#nullable disable
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,9 +34,10 @@ namespace AtlasAddressBook.Controllers
         public async Task<IActionResult> Index()
         {
         string userId = _userManager.GetUserId(User);
+
         IEnumerable<Category> model = await _categoryService.GetUserCategoriesAsync(userId);
+
         return View(model);
-            
 
         }
 
@@ -48,8 +49,9 @@ namespace AtlasAddressBook.Controllers
                 return NotFound();
             }
            
-            var category = await _context.Categories.Include(c =>c.User)
-            .FirstOrDefaultAsync(m=> m.Id == id);
+            var category = await _context.Categories
+                        .Include(c =>c.User)
+                        .FirstOrDefaultAsync(m=> m.Id == id);
 
             if (category == null)
             {
