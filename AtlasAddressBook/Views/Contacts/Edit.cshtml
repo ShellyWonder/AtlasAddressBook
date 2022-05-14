@@ -13,21 +13,21 @@
 
     <h1 class=" mt-3 d-flex justify-content-sm-start justify-content-md-center">EDIT CONTACT</h1>
     <hr />
-    
-        <h3 class=" mt-3 d-flex justify-content-sm-start justify-content-md-center">@Model.FullName</h3>
-    
-        <form asp-action="Edit" asp-controller="Contacts" method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <input type="hidden" asp-for="UserId" />
-            <input type="hidden" asp-for="Created" />
-            <input type="hidden" asp-for="ImageData" />
-            <input type="hidden" asp-for="ImageFile" />
 
-    <div class="row  row-cols-1 row-cols-lg-2 mt-1 p-2">
+    <h3 class=" mt-3 d-flex justify-content-sm-start justify-content-md-center">@Model.FullName</h3>
+
+    <form asp-action="Edit" asp-controller="Contacts" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="UserId" />
+        <input type="hidden" asp-for="Created" />
+        <input type="hidden" asp-for="ImageData" />
+        <input type="hidden" asp-for="ImageFile" />
+
+        <div class="row  row-cols-1 row-cols-lg-2 mt-1 p-2">
             <div class="col-lg-4">
 
-            
+
                 @if (Model.ImageData != null)
                 {
                     <img class="contactList-image" src="@_imageService.ConvertByteArrayToFile(Model.ImageData, Model!.ImageType!)" alt="contact image" />
@@ -47,7 +47,7 @@
             <div class="col-12 col-lg-8">
                 <!--creates row inside of the column-->
                 <div class="row mb-1">
-                   
+
                     <div class="col-12 col-lg-6 form-group">
                         <label asp-for="FirstName" class="form-label"></label>
                         <input asp-for="FirstName" class="form-control" />
@@ -87,7 +87,10 @@
                     </div>
                     <div class="col-12 col-lg-6 mt-1 form-group">
                         <label asp-for="State" class="control-label mt-1"></label>
-                        <select asp-for="State" asp-items="ViewBag.StatesList" class="form-control"></select>
+                        <select asp-for="State" asp-items="ViewBag.StatesList" class="form-control">
+                            <option value="0" selected>Choose One...</option>
+
+                        </select>
                         <span asp-validation-for="State" class="text-light"></span>
                     </div>
                     <div class="col-12 col-lg-6 form-group">
@@ -114,15 +117,15 @@
                     <div class="col-12 d-flex justify-content-end mt-2 p-2">
                         <input type="submit" asp-action="Edit" asp-controller="Contacts" class="w-100 btn btn-lg glass-button" />
                     </div>
-                        <div>
-                            <a asp-action="Index">Back to List</a>
-                        </div>
+                    <div>
+                        <a asp-action="Index">Back to List</a>
+                    </div>
                 </div>
             </div>
-            </div>
-        </form>
+        </div>
+    </form>
 
-    </div>
+</div>
 
 
 @section Scripts {
