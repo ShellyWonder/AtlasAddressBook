@@ -10,7 +10,7 @@
     <h1 class=" mt-3 d-flex justify-content-sm-start justify-content-md-center">ALL CONTACTS</h1>
 
 <p>
-    <a class="glass-button ms-3" asp-controller="Contacts" asp-action="Create">Create New CONTACT</a>
+    <a class="glass-button ms-3" asp-controller="Contacts" asp-action="Create">CREATE NEW CONTACT</a>
 </p>
 </div>
 @foreach (var item in Model)
@@ -37,9 +37,9 @@
                 </div>
             </div>
             <div class="m-3">
-                <a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="bi-pencil-fill" style="font-size: 1.5rem; color: greenyellow "></i></a> |
-                <a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi-person-fill" style="font-size: 1.5rem; color: white"></i></a> |
-                <a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="bi-trash-fill" style="font-size: 1.5rem; color: red"></i></a>
+                <a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="bi-pencil-fill"></i></a> |
+                <a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi-person-fill"></i></a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="bi-trash-fill"></i></a>
             </div>
         </div>
     </div>

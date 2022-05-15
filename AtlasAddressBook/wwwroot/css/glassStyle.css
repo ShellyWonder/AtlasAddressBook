@@ -1,5 +1,5 @@
 ﻿:root {
-    --dark-gs-color: #13133;
+    --dark-gs-color: #131313;
     --light-gs-color: #ffffff;
     --hightlight-gs-color: yellow;
 }
@@ -53,7 +53,7 @@ body{
     text-transform: uppercase;
 }
 
-}
+
 
 .glass-button:hover {
     background-color: rgba(255, 255, 255, 0.3);
@@ -62,4 +62,20 @@ body{
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--formfocusShadow);
     outline: 0 none;
 }
-
+/* custom icon styles*/
+.bi-pencil-fill {
+    font-size: 1.5rem !important;
+    color: greenyellow !important;
+}
+.bi-person-fill {
+   font-size: 1.5rem !important; 
+   color: mediumpurple !important;
+}
+.bi-trash-fill {
+    font-size: 1.5rem !important;
+    color: red !important;
+}
+.bi-card-list {
+    font-size: 1.5rem !important;
+    color: deeppink !important;
+}
