@@ -10,6 +10,14 @@
   <ItemGroup>
     <Content Remove="Views\Home\Index.cshtml" />
     <Content Remove="Views\Home\Privacy.cshtml" />
+    <Content Remove="Views\Shared\LayoutNoGlass.cshtml" />
+    <Content Remove="Views\Shared\_LayoutCategories.cshtml" />
+    <Content Remove="Views\Shared\_LayoutContacts.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\Shared\_LayoutCategories.cshtml.css" />
+    <None Remove="Views\Shared\_LayoutContacts.cshtml.css" />
   </ItemGroup>
 
   <ItemGroup>
