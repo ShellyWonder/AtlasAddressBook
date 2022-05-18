@@ -149,7 +149,7 @@ namespace AtlasAddressBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,FirstName,LastName,Birthday,Address1,Address2,City,State,ZipCode,Email,PhoneNumber,Created,ImageData,ImageFile")] Contact contact, List<int> categoryList)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,FirstName,LastName,Birthday,Address1,Address2,City,State,ZipCode,EmailAddress,PhoneNumber,Created,ImageData,ImageFile")] Contact contact, List<int> categoriesList)
         {
             if (id != contact.Id)
             {
@@ -181,7 +181,7 @@ namespace AtlasAddressBook.Controllers
                     }
 
 
-                    await _categoryService.AddContactToCategoriesAsync(categoryList, contact.Id);
+                    await _categoryService.AddContactToCategoriesAsync(categoriesList, contact.Id);
 
 
                 }

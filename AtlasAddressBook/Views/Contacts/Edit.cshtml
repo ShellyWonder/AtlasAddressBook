@@ -60,8 +60,8 @@
                     </div>
 
                     <div class="col-12 col-lg-6 form-group">
-                        <label asp-for="EmailAddress" class="form-label mt-1">Email</label>
-                        <input asp-for="EmailAddress" class="form-control " />
+                        <label asp-for="EmailAddress" class="control-label"></label>
+                        <input asp-for="EmailAddress" class="form-control" />
                         <span asp-validation-for="EmailAddress" class="text-danger"></span>
                     </div>
                     <div class="col-12 col-md-6 form-group">
@@ -105,16 +105,13 @@
                     </div>
 
                     <div class="col-12 form-group">
-                        @foreach (var category in Model!.Categories)
-                        {
-                            <div class="form-check form-switch form-check-inline">
-                                <label asp-for="Categories" class="control-label">Add Contact to Categories</label>
-                                <select name="CategoryList" class="form-select" asp-items="ViewBag.CategoryList" multiple></select>
-                            </div>
-
-                        }
+                        <div class="form-check form-switch form-check-inline">
+                            <label asp-for="Categories" class="control-label">Add Contact to Categories</label>
+                            <select name="CategoriesList" class="form-select" asp-items="@ViewBag.CategoryList" multiple></select>
+                        </div>
                     </div>
-                    <div class="col-12 d-flex justify-content-end mt-2 p-2">
+
+                    <div class="col-12 mt-2 p-2">
                         <input type="submit" asp-action="Edit" asp-controller="Contacts" class="w-100 btn btn-lg glass-button" />
                     </div>
                     <div>
