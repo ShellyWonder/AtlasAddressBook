@@ -63,19 +63,29 @@
                             <input type="text" readonly class="form-control" id="city" Value="@Model.City"  />
                         </div>
                         <!--STATES drop down-->
-                        <div class="col-12  col-lg-6 mt-1 form-group">
-                            <label asp-for="State" class="control-label"></label>
-                            <select asp-for="State" asp-items="ViewBag.StatesList" class="form-control">State</select>
-                            <span asp-validation-for="State" class="text-light"></span>
+                        <div class="col-12 col-lg-6 form-group">
+                            <label for="inputState" class="form-label mt-1">State</label>
+                            <input type="text" readonly class="form-control" id="city" Value="@Model.State"  />
                         </div>
+
                         <div class="col-12 col-lg-6 form-group">
                             <label for="City" class="form-label mt-1">Zip</label>
                             <input type="text" readonly class="form-control" id="zip" Value="@Model.ZipCode" />
                         </div>
                         <div class="col-12 col-lg-6 form-group">
                             <label for="Birthday" class="form-label mt-1">Birthday</label>
-                            <input type="date" readonly class="form-control" id="Birthday" Value="@Model.Birthday" />
+                            <input type="text" readonly class="form-control" id="Birthday" Value="@Model.Birthday" />
                         </div>
+                        <div class="col-12">
+                        @foreach(var category in Model.Categories)
+                        {
+                            <div class="form-check form-check-inline mt-1">
+                                <input type="checkbox" checked="checked" readonly class="form-check-input" name="CategoryList" value="@category.Id" />
+                                <label class="form-check-label" for="CategoryList">@category.Name</label>
+                            </div>
+                        }
+                    </div>
+
                         <div class="m-1">
                         <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
                         <a asp-action="Index">Back to List</a> 
