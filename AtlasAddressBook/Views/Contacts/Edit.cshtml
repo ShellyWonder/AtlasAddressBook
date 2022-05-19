@@ -42,15 +42,15 @@
                            onchange="document.getElementById('contactImage').src = window.URL.createObjectURL(this.files[0])" />
                     <span asp-validation-for="ImageFile" class="text-danger"></span>
                     @if (Model?.ImageData != null)
-                {
-                    <img id="contactImage" class="img-fluid img-thumbnail" style="width:100px;height:100px" src="data:image/*;base64,@(Convert.ToBase64String(Model.ImageData))">
-                }
-                else
-                {
-                    <img id="contactImage" class="img-fluid img-thumbnail" style="width:100px;height:100px" src="/img/GirlOne_4x.png">
-                }
+                    {
+                        <img id="contactImage" class="img-fluid img-thumbnail" style="width:100px;height:100px" src="data:image/*;base64,@(Convert.ToBase64String(Model.ImageData))">
+                    }
+                    else
+                    {
+                        <img id="contactImage" class="img-fluid img-thumbnail" style="width:100px;height:100px" src="/img/GirlOne_4x.png">
+                    }
                 </div>
-                    
+
             </div>
 
             <div class="col-12 col-lg-8">
@@ -66,17 +66,6 @@
                         <label asp-for="LastName" class="form-label"></label>
                         <input asp-for="LastName" class="form-control" />
                         <span asp-validation-for="LastName" class="text-danger"></span>
-                    </div>
-
-                    <div class="col-12 col-lg-6 form-group">
-                        <label asp-for="EmailAddress" class="control-label"></label>
-                        <input asp-for="EmailAddress" class="form-control" />
-                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
-                    </div>
-                    <div class="col-12 col-md-6 form-group">
-                        <label asp-for="PhoneNumber" class="form-label mt-1">Phone Number</label>
-                        <input asp-for="PhoneNumber" class="form-control" />
-                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                     </div>
 
                     <div class="col-12 col-lg-6 form-group">
@@ -113,18 +102,35 @@
                         <span asp-validation-for="Birthday" class="text-danger"></span>
                     </div>
                     <div class="col-12 col-lg-6 form-group">
-                        @foreach(var category in Model.Categories)
-                        {
-                            <div class="form-check form-check-inline mt-1">
-                                <input type="checkbox" checked="checked" readonly class="form-check-input" name="CategoryList" value="@category.Id" />
-                                <label class="form-check-label" for="CategoryList">@category.Name</label>
+
+                        <div class="row row-cols-2">
+                            <div class="col-12  form-group">
+                                <label asp-for="EmailAddress" class="control-label"></label>
+                                <input asp-for="EmailAddress" class="form-control" />
+                                <span asp-validation-for="EmailAddress" class="text-danger"></span>
                             </div>
-                        }
+                            <div class="col-12 form-group">
+                                <label asp-for="PhoneNumber" class="form-label mt-1">Phone Number</label>
+                                <input asp-for="PhoneNumber" class="form-control" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+
+                        </div>
                     </div>
-                    <div class="col-12 col-lg-6 d-flex justify-content-end form-group">
-                        <div class="form-check form-switch form-check-inline">
-                            <label asp-for="Categories" class="control-label">Add Contact to Categories</label>
-                            <select name="CategoriesList" class="form-select" asp-items="@ViewBag.CategoryList" multiple></select>
+                    <div class="col-12 d-flex justify-content-start form-group">
+                        <div class="row row-col-1 row-cols-lg-2">
+
+                            @foreach (var category in Model!.Categories)
+                            {
+                                <div class=" col-12 col-lg-6 form-check form-check-inline mt-1">
+                                    <input type="checkbox" checked="checked" readonly class="form-check-input" name="CategoryList" value="@category.Id" />
+                                    <label class="form-check-label" for="CategoryList">@category.Name</label>
+                                </div>
+                            }
+                            <div class=" col-12 col-lg-6 mt-1">
+                                <label asp-for="Categories" class="control-label">Delete or Add Categories</label>
+                                <select name="CategoriesList" class="form-select" asp-items="@ViewBag.CategoryList" multiple></select>
+                            </div>
                         </div>
                     </div>
                     <div class="col-12 mt-2 p-2">
