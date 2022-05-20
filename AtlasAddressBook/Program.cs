@@ -3,6 +3,7 @@ using AtlasAddressBook.Models;
 using AtlasAddressBook.Services;
 using AtlasAddressBook.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -22,6 +23,8 @@ builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<SearchService>();
 builder.Services.AddScoped<DataService>();
+builder.Services.AddTransient<IEmailSender, BasicEmailService>();
+
 builder.Services.AddMvc();
 var app = builder.Build();
 var scope = app.Services.CreateScope();
