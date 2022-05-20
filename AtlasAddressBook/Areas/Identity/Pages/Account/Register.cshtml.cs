@@ -111,7 +111,7 @@ namespace AtlasAddressBook.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null!)
         {
-            returnUrl ??= Url.Content("~/Account/RegisterConfirmation");
+            returnUrl ??= Url.Content("~/Contacts/Index");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {

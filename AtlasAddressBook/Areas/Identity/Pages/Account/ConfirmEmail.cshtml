@@ -3,6 +3,13 @@
 @{
     ViewData["Title"] = "Confirm email";
 }
+<div class="row glass-cf-style d-flex align-items-center me-2 ms-2 mt-5 p-5">
 
-<h1>@ViewData["Title"]</h1>
+<h1>EMAIL CONFIRMED! </h1>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
+<hr/>
+<div class="mt-3">
+<h3> Let's get started!</h3>
+<a asp-page="./Login" class="w-25 glass-button pt-2 mt-2 mb-2 ">LOGIN</a>
+</div>
+</div>
