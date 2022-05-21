@@ -12,9 +12,12 @@ a{
 a:visited, a:hover, a:active, a:focus{
     color: var(--hightlight-gs-color);
 }
-.fab:visited, fab:hover, fab:active, fab:focus{
-    color: var(--hightlight-gs-color)!important;
+
+footer .social > a:hover {
+    color: var(--hightlight-gs-color);
+    opacity: 0.9;
 }
+
 body{
     color: var(--light-gs-color);
 }
