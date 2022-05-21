@@ -12,6 +12,9 @@ a{
 a:visited, a:hover, a:active, a:focus{
     color: var(--hightlight-gs-color);
 }
+.fab:visited, fab:hover, fab:active, fab:focus{
+    color: var(--hightlight-gs-color)!important;
+}
 body{
     color: var(--light-gs-color);
 }
