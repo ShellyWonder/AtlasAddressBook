@@ -2,16 +2,18 @@
 @using AtlasAddressBook.Models
 @using AtlasAddressBook.Services.Interfaces
 @inject IImageService _imageService
+@inject ICategoryService _categoryService
 
 @{
     ViewData["Title"] = "Index";
+
 }
 <div class="glass-cf-style mb-3">
     <h1 class=" mt-3 d-flex justify-content-sm-start justify-content-md-center">ALL CONTACTS</h1>
 
-<p>
-    <a class="glass-button ms-3" asp-controller="Contacts" asp-action="Create">CREATE NEW CONTACT</a>
-</p>
+    <p>
+        <a class="glass-button ms-3" asp-controller="Contacts" asp-action="Create">CREATE NEW CONTACT</a>
+    </p>
 </div>
 @foreach (var item in Model)
 {
@@ -31,9 +33,26 @@
 
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">@Html.DisplayFor(modelItem => @item.FirstName) @Html.DisplayFor(modelItem => @item.LastName) </h5>
-                    <div class="card-text"><strong>Email:</strong> @Html.DisplayFor(modelItem => @item.EmailAddress) </div>
-                    <div class="card-text"><strong>Phone:</strong> @Html.DisplayFor(modelItem => @item.PhoneNumber) </div>
+                    <h5 class="card-title"><strong>@item.FirstName @item.LastName</strong></h5>
+                    <div class="card-text"><strong>Email:</strong> @item.EmailAddress </div>
+                    <div class="card-text"><strong>Phone:</strong> @item.PhoneNumber </div>
+                    <div class="card-text"><strong>Categories:</strong>  </div>
+                    @if (@item.Categories.Count > 0)
+                    {
+                        @foreach (var category in item.Categories)
+                        {
+                            <div class="form-check form-check-inline mt-1">
+                                <input type="checkbox" checked="checked" readonly class="form-check-input" name="CategoryList" value="@category.Id" />
+                                <label class="form-check-label" for="CategoryList">@category.Name</label>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No category selected yet.</p>
+                    }
+
+
                 </div>
             </div>
             <div class="m-3">
