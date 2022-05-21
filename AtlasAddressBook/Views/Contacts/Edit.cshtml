@@ -68,71 +68,64 @@
                         <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
 
-                    <div class="col-12 col-lg-6 form-group">
-                        <label asp-for="Address1" class="form-label mt-1">Address</label>
+                    <div class="col-12 col-lg-6  form-group">
+                        <label asp-for="Address1" class="form-label">Address</label>
                         <input asp-for="Address1" class="form-control" />
                         <span asp-validation-for="Address1" class="text-danger"></span>
                     </div>
                     <div class="col-12 col-lg-6 form-group">
-                        <label asp-for="Address2" class="form-label mt-1">Address 2</label>
+                        <label asp-for="Address2" class="form-label">Address 2</label>
                         <input asp-for="Address2" class="form-control" />
                         <span asp-validation-for="Address2" class="text-danger"></span>
                     </div>
                     <div class="col-12 col-lg-6 form-group">
-                        <label asp-for="City" class="form-label mt-1"></label>
+                        <label asp-for="City" class="form-label"></label>
                         <input asp-for="City" class="form-control" />
                         <span asp-validation-for="City" class="text-danger"></span>
                     </div>
-                    <div class="col-12 col-lg-6 mt-1 form-group">
-                        <label asp-for="State" class="control-label mt-1"></label>
+                    <div class="col-12 col-lg-6 form-group">
+                        <label asp-for="State" class="control-label"></label>
                         <select asp-for="State" asp-items="ViewBag.StatesList" class="form-control">
                             <option value="0" selected>Choose One...</option>
-
                         </select>
                         <span asp-validation-for="State" class="text-light"></span>
                     </div>
                     <div class="col-12 col-lg-6 form-group">
-                        <label asp-for="ZipCode" class="form-label mt-1"></label>
+                        <label asp-for="ZipCode" class="form-label"></label>
                         <input asp-for="ZipCode" class="form-control" />
                         <span asp-validation-for="ZipCode" class="text-danger"></span>
                     </div>
                     <div class="col-12 col-lg-6 form-group">
-                        <label asp-for="Birthday" class="form-label mt-1"></label>
+                        <label asp-for="Birthday" class="form-label"></label>
                         <input asp-for="Birthday" class="form-control" />
                         <span asp-validation-for="Birthday" class="text-danger"></span>
                     </div>
-                    <div class="col-12 col-lg-6 form-group">
-
-                        <div class="row row-cols-2">
-                            <div class="col-12  form-group">
+                            <div class="col-12  col-lg-6 form-group">
                                 <label asp-for="EmailAddress" class="control-label"></label>
                                 <input asp-for="EmailAddress" class="form-control" />
                                 <span asp-validation-for="EmailAddress" class="text-danger"></span>
                             </div>
-                            <div class="col-12 form-group">
-                                <label asp-for="PhoneNumber" class="form-label mt-1">Phone Number</label>
+                            <div class="col-12 col-lg-6 form-group">
+                                <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
                                 <input asp-for="PhoneNumber" class="form-control" />
                                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                             </div>
-
-                        </div>
+                    <div class=" col-12 col-lg-6  form-group">
+                        <label asp-for="Categories" class="control-label">Delete or Add Categories</label>
+                        <select name="CategoriesList" class="form-select" asp-items="@ViewBag.CategoryList" multiple></select>
                     </div>
-                    <div class="col-12 d-flex justify-content-start form-group">
-                        <div class="row row-col-1 row-cols-lg-2">
-
-                            @foreach (var category in Model!.Categories)
-                            {
-                                <div class=" col-12 col-lg-6 form-check form-check-inline mt-1">
-                                    <input type="checkbox" checked="checked" readonly class="form-check-input" name="CategoryList" value="@category.Id" />
-                                    <label class="form-check-label" for="CategoryList">@category.Name</label>
-                                </div>
-                            }
-                            <div class=" col-12 col-lg-6 mt-1">
-                                <label asp-for="Categories" class="control-label">Delete or Add Categories</label>
-                                <select name="CategoriesList" class="form-select" asp-items="@ViewBag.CategoryList" multiple></select>
+                            <div class="col-12 d-flex justify-content-start form-group">
+                                    @foreach (var category in Model!.Categories)
+                                    {
+                                        <div class=" col col-lg-6 form-check form-check-inline">
+                                            <input type="checkbox" checked="checked" readonly class="form-check-input" name="CategoryList" value="@category.Id" />
+                                            <label class="form-check-label" for="CategoryList">@category.Name</label>
+                                        </div>
+                                    }
                             </div>
-                        </div>
-                    </div>
+
+                        
+                    
                     <div class="col-12 mt-2 p-2">
                         <input type="submit" asp-action="Edit" asp-controller="Contacts" class="w-100 btn btn-lg glass-button" />
                     </div>
