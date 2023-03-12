@@ -49,7 +49,7 @@ namespace AtlasAddressBook.Areas.Identity.Pages.Account
         {
             if (email == null)
             {
-                return RedirectToPage("/Index");
+                return RedirectToPage("/Landing");
             }
             returnUrl = returnUrl ?? Url.Content("~/");
 

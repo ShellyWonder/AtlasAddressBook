@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using AtlasAddressBook.Enums;
+
 
 namespace AtlasAddressBook.Models
 {
@@ -7,6 +9,7 @@ namespace AtlasAddressBook.Models
     {
         public int Id { get; set; }
 
+        [Required]
         public string? UserId { get; set; }
 
         [Required]
@@ -20,7 +23,7 @@ namespace AtlasAddressBook.Models
         public string? LastName { get; set; }
 
         [NotMapped]
-        public string FullName { get { return $"{FirstName} {LastName}";} }
+        public string FullName { get { return $"{FirstName} {LastName}"; } }
 
 
         [DataType(DataType.Date)]
@@ -38,18 +41,22 @@ namespace AtlasAddressBook.Models
         public string? City { get; set; }
 
         [Required]
-        public string? State { get; set; }
+        public States State { get; set; }
 
         [Required]
         [DataType(DataType.PostalCode)]
+        [RegularExpression(@"^(?!0{5}|[0-9]{9})[0-9]{5}(?:-[0-9]{4})?$", ErrorMessage = "Postal code must be 5 or 9 digits and must not contain all zeros. If 9 digits, it must not begin with 5 zeros or end in 4 zeros.")]
+        [Display(Name = "Zip Code")]
         public string? ZipCode { get; set; }
-        
+
+
+        [Required]
         [DataType(DataType.EmailAddress)]
         public string? EmailAddress { get; set; }
-        
+
         [DataType(DataType.PhoneNumber)]
         public string? PhoneNumber { get; set; }
-
+        [Required]
         [DataType(DataType.Date)]
         public DateTime Created { get; set; }
 
@@ -63,6 +70,8 @@ namespace AtlasAddressBook.Models
 
         //NAVIGATION PROPERTIES
         public virtual AppUser? User { get; set; }
+
+        //creates a join table between Contact and Category 
         public virtual ICollection<Category> Categories { get; set; } = new HashSet<Category>();
     }
 }

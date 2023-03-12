@@ -2,6 +2,7 @@
 using AtlasAddressBook.Models;
 using AtlasAddressBook.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace AtlasAddressBook.Services
 {
@@ -17,10 +18,12 @@ namespace AtlasAddressBook.Services
         {
             Contact contact = new();
 
+
             contact = await _context.Contacts
-                                    .Include(c => c.User)
-                                    .Include(c => c.Categories)
-                                    .FirstOrDefaultAsync(c => c.Id == contactId);
+                                        .Include(c => c.User)
+                                        .Include(c => c.Categories)
+                                        .FirstOrDefaultAsync(c => c.Id == contactId);
+
             return contact!;
 
         }

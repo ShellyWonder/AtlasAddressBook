@@ -7,6 +7,7 @@ namespace AtlasAddressBook.Models
         //primary Key
         public int Id { get; set; }
         //Foreign Key
+        [Required]
         public string? UserId { get; set; }
         [Required]
         [Display(Name ="Category Name")]

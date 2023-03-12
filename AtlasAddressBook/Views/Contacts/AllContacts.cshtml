@@ -4,19 +4,19 @@
 @inject IImageService _imageService
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "All Contacts";
 
 }
 <div class="glass-cf-style mb-3">
     <h1 class=" mt-3 d-flex justify-content-sm-start justify-content-md-center">ALL CONTACTS</h1>
 
-    <p>
-        <a class="glass-button ms-3" asp-controller="Contacts" asp-action="Create">CREATE NEW CONTACT</a>
-    </p>
 </div>
 @foreach (var item in Model)
 {
     <div class="mb-3 glass-cf-style">
+    <p>
+        <a class="glass-button ms-3" asp-controller="Contacts" asp-action="Create">CREATE NEW CONTACT</a>
+    </p>
         <div class="row g-0">
             <div class="col-md-4">
                 @if (item.ImageData != null)
@@ -58,9 +58,22 @@
                 <a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="bi-pencil-fill"></i></a> |
                 <a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi-person-fill"></i></a> |
                 <a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="bi-trash-fill"></i></a>
+                <a asp-action="Email" asp-route-id="@item.Id" title="Email"><i class="bi-envelope-fill"></i></a>
             </div>
         </div>
     </div>
+
+}
+else
+    {
+    <div class="glass-cf-style mb-3">
+        <h1 class=" mt-3 d-flex justify-content-sm-start justify-content-md-center">ALL CONTACTS</h1>
+        <p>No contacts yet. Let's create some.</p>
+        <p>
+            <a class="glass-button ms-3" asp-controller="Contacts" asp-action="Create">CREATE NEW CONTACT</a>
+        </p>
+    </div>
+    }
 
 }
 

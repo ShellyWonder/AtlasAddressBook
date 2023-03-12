@@ -31,7 +31,7 @@ namespace AtlasAddressBook.Controllers
     }
 
         // GET: Categories
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> AllCategories()
         {
         string userId = _userManager.GetUserId(User);
 
@@ -81,7 +81,7 @@ namespace AtlasAddressBook.Controllers
             category.UserId = _userManager.GetUserId(User);
                 _context.Add(category);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AllCategories));
             }
             
             return View(category);
@@ -135,7 +135,7 @@ namespace AtlasAddressBook.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(AllCategories));
             }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", category.UserId);
             return View(category);
@@ -168,7 +168,7 @@ namespace AtlasAddressBook.Controllers
             var category = await _context.Categories.FindAsync(id);
             _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(AllCategories));
         }
 
         private bool CategoryExists(int id)

@@ -1,24 +1,31 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_LayoutLanding.cshtml";
 }
 
 
-    <div class="row glass-cf-style d-flex align-items-center me-2 ms-2 mt-5 p-5">
-        <div class=" col-12 mt-5  col-lg-6 order-last order-lg-first text-center text-light">
-            <h1>MANAGE ALL YOUR CONTACTS IN ONE PLACE</h1>
+<div class="row  d-flex align-items-center me-2 ms-2 mt-5 p-5">
+    <div class=" col-12 mt-5  col-lg-6 order-last order-lg-first text-center text-light">
+        <h1>MANAGE ALL YOUR CONTACTS IN ONE PLACE</h1>
 
-            <h3>A simple online address book that allows you to access your contacts from anywhere!</h3>
+        <h3>A simple online address book that allows you to access your contacts from anywhere!</h3>
 
-            <a asp-controller="Contacts" asp-action="index" class="w-50 glass-button pt-2 mt-2 mb-2">CHECK IT OUT</a>
 
-            <p> Built with ASP.NET Core, C#, .NET6, Bootstrap 5 and Postgres SQL.</p>
-
-            <p>Hosted with Heroku, CI/CD with Github</p>
+        <p class="subtitle"> Built with the following technologies:</p>
+        <div class="col-12 pb-3 mb-2">
+            <br><i class="icon devicon-dot-net-plain-wordmark colored icon me-2"></i>
+            <i class="icon devicon-csharp-plain-wordmark colored icon me-2"></i>
+            <i class="icon devicon-postgresql-plain-wordmark colored icon me-2"></i>
+            <i class="icon devicon-bootstrap-plain-wordmark colored icon"></i>
         </div>
-
-        <div class="col-12 col-lg-6  order-first order-lg-last d-flex justify-content-center" data-tilt>
-            
-                <img src="/img/black_book_pro_logo_510.png" class="img-fluid" alt="address book logo"  />
+        <div class="col-12">
+            <a asp-controller="Contacts" asp-action="AllContacts" class="w-50 glass-button pt-2 mt-2 mb-2">CHECK IT OUT</a>
         </div>
     </div>
+
+    <div class="col-12 col-lg-6  order-first order-lg-last d-flex justify-content-center" data-tilt>
+
+        <img src="/img/black_book_pro_logo_510.png" class="img-fluid glass-cf-style p-3" alt="address book logo" />
+    </div>
+</div>
 

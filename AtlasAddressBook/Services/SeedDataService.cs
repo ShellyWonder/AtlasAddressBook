@@ -7,22 +7,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AtlasAddressBook.Services
 {
-    public class DataService
+    public class SeedDataService : ISeedDataService 
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly ICategoryService _categoryService;
 
-        public DataService(ApplicationDbContext context, 
-                           UserManager<AppUser> userManager, 
+        public SeedDataService(ApplicationDbContext context,
+                           UserManager<AppUser> userManager,
                            ICategoryService categoryService)
         {
             _context = context;
             _userManager = userManager;
             _categoryService = categoryService;
         }
-
-        public async Task ManageDataAsync()
+        public async Task ManageSeedDataAsync()
         {
             await _context.Database.MigrateAsync();
 
@@ -32,7 +31,6 @@ namespace AtlasAddressBook.Services
             await SeedDefaultCategoriesAsync(_context);
             await DefaultCategoryAssign(_categoryService, _context);
         }
-
         public DateTime GetPostGresDate(DateTime datetime)
         {
             return DateTime.SpecifyKind(datetime, DateTimeKind.Utc);
@@ -78,7 +76,7 @@ namespace AtlasAddressBook.Services
                 Address1 = "1407 Graymalkin Ln.",
                 City = "Salem Center",
                 PhoneNumber = "555-555-0101",
-                State = nameof(States.NY),
+                State = States.IL,
                 ZipCode = "10560",
                 EmailAddress = "hankmccoy@starktower.com"
             };

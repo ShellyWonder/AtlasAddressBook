@@ -2,46 +2,68 @@
 using MimeKit;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Options;
+using AtlasAddressBook.Models;
 
 namespace AtlasAddressBook.Services
 {
     public class BasicEmailService : IEmailSender
     {
-
-        private readonly IConfiguration _appSettings;
-
-
-        public BasicEmailService(IConfiguration appSettings)
+        private readonly MailSettings _mailSettings;
+        #region Constructor
+        //IOptions necessary to pass values from mailSettings
+        public BasicEmailService(IOptions<MailSettings> mailSettings)
         {
-            _appSettings = appSettings;
+            _mailSettings = mailSettings.Value;
         }
-
+        #endregion
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            var emailSender = _appSettings["SmtpSettings:UserName"];
-
+            //emailSender allows method to login to sender email account to send email
+            var emailSender = _mailSettings.Email ?? Environment.GetEnvironmentVariable("Email");
             MimeMessage newEmail = new();
 
+            //sender's email
             newEmail.Sender = MailboxAddress.Parse(emailSender);
-            newEmail.To.Add(MailboxAddress.Parse(email));
+
+            //recipient's email address
+            foreach (var emailAddress in email.Split(";"))
+            {
+                newEmail.To.Add(MailboxAddress.Parse(emailAddress));
+            }
             newEmail.Subject = subject;
 
-            //Email Body
+            //create email message
             BodyBuilder emailBody = new();
             emailBody.HtmlBody = htmlMessage;
             newEmail.Body = emailBody.ToMessageBody();
 
-            //configuring the SMTP server
-            using MailKit.Net.Smtp.SmtpClient smtpClient = new();
+            using SmtpClient smtpClient = new SmtpClient();
 
-            var host = _appSettings["SmtpSettings:Host"];
-            var port = Convert.ToInt32(_appSettings["SmtpSettings:Port"]);
+            try
+            {
+                var host = _mailSettings.Host ?? Environment.GetEnvironmentVariable("Host");
 
-            await smtpClient.ConnectAsync(host, port, SecureSocketOptions.StartTls);
-            await smtpClient.AuthenticateAsync(emailSender, _appSettings["SmtpSettings:Password"]);
-            await smtpClient.SendAsync(newEmail);
-            await smtpClient.DisconnectAsync(true);
+                //Parse necessary because without parse port is recognized as a string, needs to be int.
+                var port = _mailSettings.Port != 0 ? _mailSettings.Port : int.Parse(Environment.GetEnvironmentVariable("Port")!);
+                var password = _mailSettings.Password ?? Environment.GetEnvironmentVariable("Password");
+                //connect to sender's email
+                await smtpClient.ConnectAsync(host, port, SecureSocketOptions.StartTls);
+                //Auth sender's email
+                await smtpClient.AuthenticateAsync(emailSender, password);
+                //send email to recepient 
+                await smtpClient.SendAsync(newEmail);
+                //disconnect from sender's email
+                await smtpClient.DisconnectAsync(true);
+
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+                throw;
+            }
 
         }
     }
 }
+
