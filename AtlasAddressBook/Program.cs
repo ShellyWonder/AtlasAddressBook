@@ -4,12 +4,11 @@ using AtlasAddressBook.Services;
 using AtlasAddressBook.Services.Interfaces;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
-using AtlasAddressBook.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = ConnectionHelper.GetConnectionString(builder.Configuration);
+var connectionString = DataUtility.GetConnectionString(builder.Configuration);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString!));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -21,7 +20,6 @@ builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<SearchService>();
-builder.Services.AddScoped<SeedDataService>();
 builder.Services.AddScoped<IEmailSender, BasicEmailService>();
 //for development; comes back null in production
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
@@ -32,7 +30,7 @@ var app = builder.Build();
 var scope = app.Services.CreateScope();
 
 //syncs db with migrations
-await DataHelper.ManageDataAsync(scope.ServiceProvider);
+await DataUtility.ManageDataAsync(scope.ServiceProvider);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -1,43 +1,71 @@
-﻿using AtlasAddressBook.Data;
-using AtlasAddressBook.Enums;
+﻿using AtlasAddressBook.Enums;
 using AtlasAddressBook.Models;
+using AtlasAddressBook.Services;
 using AtlasAddressBook.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
-namespace AtlasAddressBook.Services
+namespace AtlasAddressBook.Data
 {
-    public class SeedDataService 
+    public static class DataUtility
     {
-        private readonly ApplicationDbContext _context;
-        private readonly UserManager<AppUser> _userManager;
-        private readonly ICategoryService _categoryService;
+        //Every method in a static class must be static as well
+        public static string? GetConnectionString(IConfiguration configuration)
+        {
+            //Local environment
+            var connectionString = configuration.GetSection("ConnectionStrings")["DefaultConnection"];
 
-        public SeedDataService(ApplicationDbContext context,
-                           UserManager<AppUser> userManager,
-                           ICategoryService categoryService)
-        {
-            _context = context;
-            _userManager = userManager;
-            _categoryService = categoryService;
+            //Identifies the deployment environment
+            //Environment variable changes according to host
+            //may need to change when deploying to RailWay
+            var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");//Heroku Environment variable name
+
+            return string.IsNullOrEmpty(databaseUrl) ? connectionString : BuildConnectionString(databaseUrl);
         }
-        public async Task ManageSeedDataAsync()
+        //building connection string from the heroku environment
+        private static string BuildConnectionString(string databaseUrl)
         {
-            await _context.Database.MigrateAsync();
+            //postgres specific
+            //converts URL to URI; URL locates a resource, URI identifies a resource
+            var databaseUri = new Uri(databaseUrl);
+            var userInfo = databaseUri.UserInfo.Split(':');
+            var builder = new NpgsqlConnectionStringBuilder
+            {
+                Host = databaseUri.Host,
+                Port = databaseUri.Port,//may need to change when deploying to RailWay
+                Username = userInfo[0],
+                Password = userInfo[1],
+                Database = databaseUri.LocalPath.TrimStart('/'),
+                //encrypts the data
+                SslMode = SslMode.Require,
+                TrustServerCertificate = true
+            };
+            return builder.ToString();
+        }
+        public static async Task ManageDataAsync(IServiceProvider svcProvider)
+        {
+            //Service: An instance of applicationDbContext
+            var dbContextSvc = svcProvider.GetRequiredService<ApplicationDbContext>();
+            //Service: An instance of UserManager<AppUser>
+            var userManagerSvc = svcProvider.GetRequiredService<UserManager<AppUser>>();
+            var categorySvc = svcProvider.GetRequiredService<CategoryService>();
+            //same functionality as update-database
+            await dbContextSvc.Database.MigrateAsync();
 
             //Custom Address Book seeding methods
-            await SeedDefaultUserAsync(_userManager);
-            await SeedDefaultContacts(_context);
-            await SeedDefaultCategoriesAsync(_context);
-            await DefaultCategoryAssign(_categoryService, _context);
-            await SeedDemoUserAsync(_userManager);
+            await SeedDefaultUserAsync(userManagerSvc);
+            await SeedDefaultContacts(dbContextSvc);
+            await SeedDefaultCategoriesAsync(dbContextSvc);
+            await DefaultCategoryAssign(categorySvc, dbContextSvc);
+            await SeedDemoUserAsync(userManagerSvc);
         }
-        public DateTime GetPostGresDate(DateTime datetime)
+        public static DateTime GetPostGresDate(DateTime datetime)
         {
             return DateTime.SpecifyKind(datetime, DateTimeKind.Utc);
         }
 
-        private async Task SeedDefaultUserAsync(UserManager<AppUser> userManagerSvc)
+        private static async Task SeedDefaultUserAsync(UserManager<AppUser> userManagerSvc)
         {
             var defaultUser = new AppUser
             {
@@ -64,9 +92,9 @@ namespace AtlasAddressBook.Services
             }
         }
 
-        private async Task SeedDefaultContacts(ApplicationDbContext dbContextSvc)
+        private static async Task SeedDefaultContacts(ApplicationDbContext dbContextSvc)
         {
-            var userId = dbContextSvc.Users.FirstOrDefault(u => u.Email == "tonystark@mailinator.com").Id;
+            var userId = dbContextSvc.Users.FirstOrDefault(u => u.Email == "tonystark@mailinator.com")!.Id;
 
             var defaultContact = new Contact
             {
@@ -100,7 +128,7 @@ namespace AtlasAddressBook.Services
 
         }
 
-        private async Task SeedDefaultCategoriesAsync(ApplicationDbContext dbContextSvc)
+        private static async Task SeedDefaultCategoriesAsync(ApplicationDbContext dbContextSvc)
         {
             var userId = dbContextSvc.Users.FirstOrDefault(u => u.Email == "tonystark@mailinator.com")!.Id;
 
@@ -128,7 +156,7 @@ namespace AtlasAddressBook.Services
 
         }
 
-        private async Task DefaultCategoryAssign(ICategoryService categorySvc, ApplicationDbContext dbContextSvc)
+        private static async Task DefaultCategoryAssign(ICategoryService categorySvc, ApplicationDbContext dbContextSvc)
         {
             var user = dbContextSvc.Users
                 .Include(c => c.Categories)
@@ -172,6 +200,6 @@ namespace AtlasAddressBook.Services
             }
         }
 
-        
+
     }
 }
