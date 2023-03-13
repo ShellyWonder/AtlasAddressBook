@@ -21,7 +21,7 @@ builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<SearchService>();
-builder.Services.AddScoped<ISeedDataService, SeedDataService>();
+builder.Services.AddScoped<SeedDataService>();
 builder.Services.AddScoped<IEmailSender, BasicEmailService>();
 //for development; comes back null in production
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AtlasAddressBook.Services
 {
-    public class SeedDataService : ISeedDataService 
+    public class SeedDataService 
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
@@ -30,6 +30,7 @@ namespace AtlasAddressBook.Services
             await SeedDefaultContacts(_context);
             await SeedDefaultCategoriesAsync(_context);
             await DefaultCategoryAssign(_categoryService, _context);
+            await SeedDemoUserAsync(_userManager);
         }
         public DateTime GetPostGresDate(DateTime datetime)
         {
@@ -141,5 +142,36 @@ namespace AtlasAddressBook.Services
                 await categorySvc.AddContactToCategoriesAsync(category.Id, contact!.Id);
             }
         }
+        public static async Task SeedDemoUserAsync(UserManager<AppUser> userManager)
+        {
+            //Seed DemoUser
+            var demoUser = new AppUser
+            {
+                UserName = "demouser@mailinator.com",
+                Email = "demouser@mailinator.com",
+                FirstName = "Demo",
+                LastName = "User",
+                EmailConfirmed = true,
+            };
+            try
+            {
+                var user = await userManager.FindByEmailAsync(demoUser.Email);
+                if (user == null)
+                {
+                    await userManager.CreateAsync(demoUser, "Abc&123!");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("*************  ERROR  *************");
+                Console.WriteLine("Error Seeding Demo User.");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("***********************************");
+                throw;
+            }
+        }
+
+        
     }
 }
