@@ -1,13 +1,11 @@
-﻿@model AtlasAddressBook.Models.ViewModels.EmailCategoryViewModel;
-@using AtlasAddressBook.Models.ViewModels;
-       
+﻿@model AtlasAddressBook.Models.ViewModels.EmailContactViewModel
+
 @{
-    ViewData["Title"] = "Email Category";
+    ViewData["Title"] = "Email Contact";
 }
-<!--add css formating to make consistant with other views-->
-<h1>Email Category:@Model.EmailData!.GroupName</h1>
-<div class="p-2">
-    <form asp-action="EmailCategory" method="post">
+<div class="glass-cf-style mb-3 p-2">
+<h1>Email @Model.EmailData!.FullName</h1> @*may need to change to reflect group emails*@
+    <form asp-action="EmailContact" asp-asp-controller="Contacts" method="post">
         <input type="hidden" asp-for="@Model.EmailData.GroupName" />
         <div class="row row-cols-1 row-cols-md-2 g-3 mb-3">
             <div class="col col-md-12">
@@ -25,7 +23,7 @@
                 <textarea class="form-control" rows=10 asp-for="@Model.EmailData.Body" required></textarea>
             </div>
             <div class="col text-end">
-                <button class="btn btn-primary rounded-pill btnlinks" type="submit">Send</button>
+                <button class="btn glass-button" type="submit">Send</button>
             </div>
         </div>
     </form>
