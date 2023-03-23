@@ -13,6 +13,8 @@ a:visited, a:hover, a:active, a:focus{
     color: var(--hightlight-gs-color);
 }
 
+
+
 footer .social > a:hover {
     color: var(--hightlight-gs-color);
     opacity: 0.9;
@@ -38,9 +40,8 @@ body{
     border-bottom: 2px rgba(40, 40, 40, 0.35) solid;
     border-right: 2px rgba(40, 40, 40, 0.35) solid;
 }
-    
-  
-.glass-button {
+
+    .glass-button {
     color: var(--hightlight-gs-color);
     display: inline-block;
     border: 0;
