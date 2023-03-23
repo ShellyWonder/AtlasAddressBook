@@ -2,6 +2,7 @@
 @model RegisterConfirmationModel
 @{
     ViewData["Title"] = "Register confirmation";
+    Layout = "~/Views/Shared/_LayoutLanding.cshtml";    
 }
 <div class="row glass-cf-style d-flex align-items-center me-2 ms-2 mt-5 p-5">
 
@@ -16,7 +17,7 @@
     }
     else
     {
-<p class="text-light">
+<p class="text-light d-flex align-items-center">
         Please check your email to confirm your account.
 </p>
     }

@@ -8,14 +8,13 @@
         Layout = "/Areas/Identity/Pages/_Layout.cshtml";
     }
 }
-
-<h1>Manage your account</h1>
-
-<div>
-    <h2>Change your account settings</h2>
-    <hr />
+<div class=" row glass-cf-style">
+    <h1 class="row mt-3 d-flex justify-content-sm-start justify-content-md-center">Manage your account</h1>
+    <h2 class="row d-flex justify-content-sm-start justify-content-md-center">Change your account settings</h2>
+        <hr />
+   
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 mt-3">
             <partial name="_ManageNav" />
         </div>
         <div class="col-md-9">
@@ -26,4 +25,4 @@
 
 @section Scripts {
     @RenderSection("Scripts", required: false)
-}
+    }

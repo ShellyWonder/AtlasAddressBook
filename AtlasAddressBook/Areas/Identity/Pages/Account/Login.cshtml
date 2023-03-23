@@ -3,6 +3,8 @@
 
 @{
     ViewData["Title"] = "Log in";
+    Layout = "~/Views/Shared/_LayoutLanding.cshtml";
+
 }
 
 
@@ -35,13 +37,11 @@
                     <button id="login-submit" type="submit" class="w-100 btn btn-lg glass-button">LOGIN</button>
                 </div>
                 <div>
-                    <a class="w-100 btn btn-lg glass-button mt-3" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">NEW USER?</a>
+                    <a id="newUserBtn" onmouseover="changeNewUserButtonText()" onmouseout="changeNewUserBtnTxtBack()" class="w-100 btn btn-lg glass-button mt-3" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">NEW USER?</a>
                 </div>
-                <span class="mt-3 mb-3 line-thru  text-warning text-center text-uppercase">
-                    <span class="text-dark">or</span>
-                </span>
+                
                 <div class="col-12 btn-block">
-                    <button type="submit" class="w-100 btn btn-lg glass-button" name="demoEmail" value="DemoUserEmail">DEMO USER</button>
+                    <button type="submit" id="demoUserBtn" onmouseover="changeDemoUserButtonText()" onmouseout="changeDemoUserBtnTxtBack()" class="w-100 btn btn-lg glass-button mt-3" name="demoEmail" value="DemoUserEmail">DEMO USER</button>
                     </div>
             </form>
         </section>
