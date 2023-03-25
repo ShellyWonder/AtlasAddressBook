@@ -49,7 +49,8 @@ namespace AtlasAddressBook.Data
             var dbContextSvc = svcProvider.GetRequiredService<ApplicationDbContext>();
             //Service: An instance of UserManager<AppUser>
             var userManagerSvc = svcProvider.GetRequiredService<UserManager<AppUser>>();
-            var categorySvc = svcProvider.GetRequiredService<CategoryService>();
+            //Service: An instance of CategoryService
+            //CategoryService categorySvc = svcProvider.GetRequiredService<CategoryService>();
             //same functionality as update-database
             await dbContextSvc.Database.MigrateAsync();
 
@@ -57,7 +58,7 @@ namespace AtlasAddressBook.Data
             await SeedDefaultUserAsync(userManagerSvc);
             await SeedDefaultContacts(dbContextSvc);
             await SeedDefaultCategoriesAsync(dbContextSvc);
-            await DefaultCategoryAssign(categorySvc, dbContextSvc);
+            //await DefaultCategoryAssign(categorySvc, dbContextSvc);
             await SeedDemoUserAsync(userManagerSvc);
         }
         public static DateTime GetPostGresDate(DateTime datetime)
@@ -105,7 +106,7 @@ namespace AtlasAddressBook.Data
                 Address1 = "1407 Graymalkin Ln.",
                 City = "Salem Center",
                 PhoneNumber = "555-555-0101",
-                State = States.IL,
+                State = "IL",
                 ZipCode = "10560",
                 EmailAddress = "hankmccoy@starktower.com"
             };
@@ -156,7 +157,7 @@ namespace AtlasAddressBook.Data
 
         }
 
-        private static async Task DefaultCategoryAssign(ICategoryService categorySvc, ApplicationDbContext dbContextSvc)
+        private static async Task DefaultCategoryAssign(CategoryService categorySvc, ApplicationDbContext dbContextSvc)
         {
             var user = dbContextSvc.Users
                 .Include(c => c.Categories)
