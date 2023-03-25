@@ -9,11 +9,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace AtlasAddressBook.Data.Migrations
+namespace AtlasAddressBook.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220508042250_004")]
-    partial class _004
+    [Migration("20230325144727_init0001")]
+    partial class init0001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,7 +49,9 @@ namespace AtlasAddressBook.Data.Migrations
                         .HasColumnType("character varying(50)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
@@ -109,6 +111,7 @@ namespace AtlasAddressBook.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -128,10 +131,12 @@ namespace AtlasAddressBook.Data.Migrations
 
                     b.Property<string>("Address1")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(75)
+                        .HasColumnType("character varying(75)");
 
                     b.Property<string>("Address2")
-                        .HasColumnType("text");
+                        .HasMaxLength(75)
+                        .HasColumnType("character varying(75)");
 
                     b.Property<DateTime?>("Birthday")
                         .HasColumnType("timestamp with time zone");
@@ -144,6 +149,7 @@ namespace AtlasAddressBook.Data.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("EmailAddress")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("FirstName")
@@ -170,6 +176,7 @@ namespace AtlasAddressBook.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ZipCode")
@@ -338,7 +345,9 @@ namespace AtlasAddressBook.Data.Migrations
                 {
                     b.HasOne("AtlasAddressBook.Models.AppUser", "User")
                         .WithMany("Categories")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -347,7 +356,9 @@ namespace AtlasAddressBook.Data.Migrations
                 {
                     b.HasOne("AtlasAddressBook.Models.AppUser", "User")
                         .WithMany("Contacts")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
