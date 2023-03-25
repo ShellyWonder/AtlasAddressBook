@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using AtlasAddressBook.Enums;
 
@@ -41,7 +42,7 @@ namespace AtlasAddressBook.Models
         public string? City { get; set; }
 
         [Required]
-        public States State { get; set; }
+        public string? State { get; set; }
 
         [Required]
         [DataType(DataType.PostalCode)]
