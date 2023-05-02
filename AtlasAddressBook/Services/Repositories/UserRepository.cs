@@ -1,12 +1,13 @@
 ﻿using AtlasAddressBook.Data;
 using AtlasAddressBook.Models;
+using AtlasAddressBook.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace AtlasAddressBook.Services.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;

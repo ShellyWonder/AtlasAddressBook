@@ -2,6 +2,7 @@ using AtlasAddressBook.Data;
 using AtlasAddressBook.Models;
 using AtlasAddressBook.Services;
 using AtlasAddressBook.Services.Interfaces;
+using AtlasAddressBook.Services.Repositories;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +18,8 @@ builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireCo
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<IImageService, ImageService>();
-builder.Services.AddScoped<IContactService, ContactService>();
+builder.Services.AddScoped<IContactRepository, ContactRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<SearchService>();
 builder.Services.AddScoped<IEmailSender, BasicEmailService>();
